@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fumount</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Times New Roman", Georgia, serif;
+      background: #f7f3ee;
+      color: #1f1a17;
+      line-height: 1.6;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    .hero {
+      min-height: 100vh;
+      background:
+        linear-gradient(rgba(20, 16, 12, 0.18), rgba(20, 16, 12, 0.28)),
+        url("images/包装3.png") center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      color: #fffaf5;
+    }
+
+    .brand {
+      font-size: clamp(60px, 12vw, 150px);
+      letter-spacing: 0.14em;
+      font-weight: 400;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+
+    .tagline {
+      font-size: clamp(16px, 2.4vw, 26px);
+      letter-spacing: 0.08em;
+      opacity: 0.95;
+      margin-bottom: 28px;
+    }
+
+    .hero-line {
+      width: 90px;
+      height: 1px;
+      background: rgba(255, 250, 245, 0.8);
+      margin: 0 auto 28px;
+    }
+
+    .hero-text {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 17px;
+      color: rgba(255, 250, 245, 0.92);
+    }
+
+    .products {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 90px 24px 100px;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-head h2 {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      max-width: 620px;
+      margin: 0 auto;
+      font-size: 16px;
+      color: #655b54;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 1fr));
+      gap: 34px;
+    }
+
+    .card {
+      background: #fffaf6;
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: 0 14px 40px rgba(45, 29, 17, 0.08);
+      transition: transform 0.28s ease, box-shadow 0.28s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 22px 50px rgba(45, 29, 17, 0.12);
+    }
+
+    .card-image {
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background: #efe7df;
+    }
+
+    .card-image img {
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-image img {
+      transform: scale(1.04);
+    }
+
+    .card-body {
+      padding: 26px 24px 28px;
+    }
+
+    .card-body h3 {
+      font-size: 24px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+
+    .card-body p {
+      font-size: 15px;
+      color: #5e534c;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 28px 20px 40px;
+      color: #7b6f67;
+      font-size: 14px;
+    }
+
+    @media (max-width: 820px) {
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 78vh;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="brand">Fumount</h1>
+      <div class="hero-line"></div>
+      <p class="tagline">Objects of fragrance, stillness, and ritual.</p>
+      <p class="hero-text">
+        Fumount creates a quiet space between design and emotion — a refined collection
+        shaped for scent, atmosphere, and the beauty of slowing down.
+      </p>
+    </div>
+  </section>
+
+  <section class="products">
+    <div class="section-head">
+      <h2>Featured Products</h2>
+      <p>
+        A curated collection of four pieces that express the visual language of Fumount:
+        minimal, warm, and quietly striking.
+      </p>
+    </div>
+
+    <div class="product-grid">
+      <article class="card">
+        <div class="card-image">
+          <img src="images/产品1.png" alt="Fumount Product 1">
+        </div>
+        <div class="card-body">
+          <h3>Incense Set I</h3>
+          <p>
+            A calm, structured composition designed to bring softness and focus into the space.
+            Clean lines meet ritual warmth.
+          </p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="images/产品2.png" alt="Fumount Product 2">
+        </div>
+        <div class="card-body">
+          <h3>Incense Set II</h3>
+          <p>
+            A more architectural expression of the brand — bold in form, restrained in mood,
+            and made to sit beautifully in modern interiors.
+          </p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="images/产品3.png" alt="Fumount Product 3">
+        </div>
+        <div class="card-body">
+          <h3>Incense Set III</h3>
+          <p>
+            Layered, elegant, and precise. This piece emphasizes balance between visual identity,
+            tactile experience, and atmosphere.
+          </p>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-image">
+          <img src="images/产品4.png" alt="Fumount Product 4">
+        </div>
+        <div class="card-body">
+          <h3>Incense Set IV</h3>
+          <p>
+            A refined closing note to the collection — understated, premium, and crafted to
+            transform daily fragrance into a design ritual.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer">
+    © 2026 Fumount. All rights reserved.
+  </footer>
+</body>
+</html>
