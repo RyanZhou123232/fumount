@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fumount</title>
+  <title>Fúmount</title>
   <style>
     * {
       box-sizing: border-box;
@@ -73,6 +73,26 @@
       opacity: 1;
     }
 
+    .brand-name {
+      display: inline-flex;
+      align-items: flex-start;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .brand-f {
+      font-size: 1em;
+      line-height: 1;
+    }
+
+    /* Slightly smaller than F; nudge up so acute on ú lines up with top of F (Times/Georgia metrics). */
+    .brand-rest {
+      font-size: 0.88em;
+      line-height: 1;
+      margin-top: -0.075em;
+      text-transform: lowercase;
+    }
+
     .floating-logo {
       position: fixed;
       left: 50%;
@@ -80,13 +100,19 @@
       transform: translate(-50%, 0) scale(1);
       z-index: 1000;
       font-size: clamp(52px, 10vw, 144px);
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
       color: rgba(245, 236, 225, 0.96);
       white-space: nowrap;
       pointer-events: none;
       text-shadow: 0 14px 38px rgba(0, 0, 0, 0.32);
       transform-origin: center top;
+    }
+
+    .floating-logo .brand-f {
+      margin-right: 0.16em;
+    }
+
+    .floating-logo .brand-rest {
+      letter-spacing: 0.16em;
     }
 
     .hero {
@@ -131,10 +157,16 @@
 
     .eyebrow {
       font-size: 12px;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
       color: rgba(233, 226, 216, 0.7);
       margin-bottom: 26px;
+    }
+
+    .eyebrow .brand-f {
+      margin-right: 0.28em;
+    }
+
+    .eyebrow .brand-rest {
+      letter-spacing: 0.28em;
     }
 
     .hero-line {
@@ -336,6 +368,24 @@
       border-top: 1px solid var(--line);
     }
 
+    .footer .brand-f {
+      margin-right: 0.06em;
+    }
+
+    .footer .brand-rest {
+      letter-spacing: 0.06em;
+      margin-top: -0.06em;
+    }
+
+    .hero-text .brand-f {
+      margin-right: 0.04em;
+    }
+
+    .hero-text .brand-rest {
+      letter-spacing: 0.04em;
+      margin-top: -0.055em;
+    }
+
     @media (max-width: 1080px) {
       .product,
       .product:nth-child(even) {
@@ -364,6 +414,13 @@
     @media (max-width: 820px) {
       .floating-logo {
         font-size: clamp(34px, 12vw, 74px);
+      }
+
+      .floating-logo .brand-f {
+        margin-right: 0.12em;
+      }
+
+      .floating-logo .brand-rest {
         letter-spacing: 0.12em;
       }
 
@@ -397,15 +454,15 @@
 </head>
 <body>
   <div class="top-bar" id="topBar"></div>
-  <div class="floating-logo" id="floatingLogo">Fumount</div>
+  <div class="floating-logo" id="floatingLogo"><span class="brand-name" id="floatingBrandName"><span class="brand-f">F</span><span class="brand-rest">úmount</span></span></div>
 
   <section class="hero" id="hero">
     <div class="hero-content">
-      <div class="eyebrow">Fumount</div>
+      <div class="eyebrow"><span class="brand-name"><span class="brand-f">F</span><span class="brand-rest">úmount</span></span></div>
       <div class="hero-line"></div>
       <p class="tagline">Objects of fragrance, stillness, and ritual. Made by Ryan on Monday 8pm.</p>
       <p class="hero-text">
-        Fumount shapes scent into a quieter experience — where packaging, atmosphere,
+        <span class="brand-name"><span class="brand-f">F</span><span class="brand-rest">úmount</span></span> shapes scent into a quieter experience — where packaging, atmosphere,
         and material restraint come together as a modern ritual.
       </p>
     </div>
@@ -424,7 +481,7 @@
     <div class="product-list">
       <article class="product">
         <div class="product-image">
-          <img src="images/产品1.png" alt="Fumount Incense Set I">
+          <img src="images/产品1.png" alt="Fúmount Incense Set I">
         </div>
         <div class="product-copy">
           <div class="product-number">01 / Signature Piece</div>
@@ -447,7 +504,7 @@
 
       <article class="product">
         <div class="product-image">
-          <img src="images/产品2.png" alt="Fumount Incense Set II">
+          <img src="images/产品2.png" alt="Fúmount Incense Set II">
         </div>
         <div class="product-copy">
           <div class="product-number">02 / Structured Edition</div>
@@ -470,7 +527,7 @@
 
       <article class="product">
         <div class="product-image">
-          <img src="images/产品3.png" alt="Fumount Incense Set III">
+          <img src="images/产品3.png" alt="Fúmount Incense Set III">
         </div>
         <div class="product-copy">
           <div class="product-number">03 / Layered Expression</div>
@@ -493,7 +550,7 @@
 
       <article class="product">
         <div class="product-image">
-          <img src="images/产品4.png" alt="Fumount Incense Set IV">
+          <img src="images/产品4.png" alt="Fúmount Incense Set IV">
         </div>
         <div class="product-copy">
           <div class="product-number">04 / Closing Note</div>
@@ -517,11 +574,14 @@
   </section>
 
   <footer class="footer">
-    © 2026 Fumount. All rights reserved.
+    © 2026 <span class="brand-name"><span class="brand-f">F</span><span class="brand-rest">úmount</span></span>. All rights reserved.
   </footer>
 
   <script>
     const logo = document.getElementById("floatingLogo");
+    const floatingBrandName = document.getElementById("floatingBrandName");
+    const floatingBrandF = floatingBrandName.querySelector(".brand-f");
+    const floatingBrandRest = floatingBrandName.querySelector(".brand-rest");
     const hero = document.getElementById("hero");
     const topBar = document.getElementById("topBar");
 
@@ -547,7 +607,8 @@
       const g = Math.round(236 - (236 - 226) * progress);
       const b = Math.round(225 - (225 - 219) * progress);
 
-      logo.style.letterSpacing = `${spacing}em`;
+      floatingBrandF.style.marginRight = `${spacing}em`;
+      floatingBrandRest.style.letterSpacing = `${spacing}em`;
       logo.style.color = `rgb(${r}, ${g}, ${b})`;
       logo.style.transform = `translate(-50%, 0) scale(${scale})`;
 
