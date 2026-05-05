@@ -410,11 +410,27 @@
       font-feature-settings: "kern" 1;
     }
 
+    .split-flip-intro__hero {
+      margin: 0 auto clamp(14px, 2.8vw, 22px);
+      max-width: min(920px, 100%);
+    }
+
+    .split-flip-intro__hero img {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: min(38vh, 320px);
+      object-fit: contain;
+      object-position: center bottom;
+      margin: 0 auto;
+      filter: drop-shadow(0 18px 40px rgba(0, 0, 0, 0.35));
+    }
+
     .split-flip-intro__line {
-      font-size: clamp(13px, 1.65vw, 16px);
-      line-height: 1.75;
+      font-size: clamp(11px, 1.22vw, 13px);
+      line-height: 1.72;
       font-weight: 400;
-      color: rgba(255, 255, 255, 0.82);
+      color: rgba(255, 255, 255, 0.78);
       margin: 0 0 0.42em;
       letter-spacing: 0.04em;
     }
@@ -534,6 +550,248 @@
 
       .flip-module__dot {
         transition: none;
+      }
+    }
+
+    /* Immersive scroll — single horizontal row, slight Y stagger; section scroll drives sequential reveal; wheel damped in-section */
+    .immersive-scroll {
+      --iz-scroll: 0;
+      position: relative;
+      overflow: clip;
+      padding: clamp(48px, 9vw, 100px) clamp(14px, 3vw, 32px) clamp(56px, 10vw, 110px);
+      isolation: isolate;
+    }
+
+    .immersive-scroll__field {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .immersive-scroll__warm {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(120% 85% at 20% 16%, rgba(255, 252, 246, 0.5), transparent 54%),
+        linear-gradient(168deg, #ebe4dc 0%, #dfd5cb 44%, #d3cbc3 100%);
+      background-attachment: fixed;
+    }
+
+    .immersive-scroll__cool {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(100% 72% at 80% 74%, rgba(226, 232, 240, 0.42), transparent 50%),
+        linear-gradient(192deg, rgba(210, 218, 228, 0.38) 0%, rgba(188, 200, 212, 0.32) 55%, rgba(172, 186, 200, 0.3) 100%);
+      background-attachment: fixed;
+      opacity: calc(0.12 + var(--iz-scroll, 0) * 0.48);
+    }
+
+    /* Light veil — softly diffused, not heavy blur */
+    .immersive-scroll__mist {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 75% 55% at 50% 42%, rgba(255, 255, 255, 0.14), transparent 68%);
+      pointer-events: none;
+    }
+
+    .immersive-scroll__grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.06;
+      mix-blend-mode: multiply;
+      background-image: url("images/immersive-section-bg.png");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    .immersive-scroll__inner {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: min(1320px, 100%);
+      margin: 0 auto;
+    }
+
+    .immersive-scroll__row {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: center;
+      align-items: flex-end;
+      gap: clamp(6px, 1vw, 14px);
+      width: 100%;
+      margin: 0 auto;
+      padding: clamp(6px, 1.2vw, 16px) 0 clamp(4px, 1vw, 12px);
+      overflow-x: auto;
+      overflow-y: visible;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+
+    .immersive-scroll__preface {
+      text-align: center;
+      margin-bottom: clamp(22px, 4vw, 44px);
+      padding: 0 clamp(8px, 2vw, 24px);
+    }
+
+    .immersive-scroll__preface-line {
+      font-family: "Cormorant SC", "Noto Serif SC", "Songti SC", serif;
+      font-size: clamp(15px, 1.65vw, 18px);
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      line-height: 1.75;
+      color: rgba(36, 36, 42, 0.88);
+      margin: 0;
+    }
+
+    .immersive-scroll__preface-line + .immersive-scroll__preface-line {
+      margin-top: 0.65em;
+      font-size: clamp(14px, 1.45vw, 17px);
+      letter-spacing: 0.22em;
+      color: rgba(42, 42, 48, 0.78);
+    }
+
+    .immersive-step {
+      position: relative;
+      z-index: 1;
+      --immersive-reveal: 0;
+      flex: 0 0 auto;
+      min-height: 0;
+      margin: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    /* Minimal vertical ripple along the row */
+    .immersive-scroll__row .immersive-step[data-step="1"] {
+      transform: translateY(0);
+    }
+
+    .immersive-scroll__row .immersive-step[data-step="2"] {
+      transform: translateY(4px);
+    }
+
+    .immersive-scroll__row .immersive-step[data-step="3"] {
+      transform: translateY(8px);
+    }
+
+    .immersive-scroll__row .immersive-step[data-step="4"] {
+      transform: translateY(4px);
+    }
+
+    .immersive-scroll__row .immersive-step[data-step="5"] {
+      transform: translateY(0);
+    }
+
+    .immersive-step__bundle {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(8px, 1.4vw, 14px);
+      will-change: transform, opacity;
+      max-width: min(19vw, 200px);
+      text-align: center;
+      opacity: var(--immersive-reveal);
+    }
+
+    .immersive-step--from-left .immersive-step__bundle {
+      transform: translateX(calc((1 - var(--immersive-reveal)) * -56px));
+    }
+
+    .immersive-step--from-right .immersive-step__bundle {
+      transform: translateX(calc((1 - var(--immersive-reveal)) * 56px));
+    }
+
+    /* Natural image — no crop in frame */
+    .immersive-step__panel {
+      margin: 0;
+      flex-shrink: 0;
+      border-radius: 5px;
+      overflow: visible;
+      box-shadow:
+        0 20px 44px rgba(35, 38, 42, 0.14),
+        0 1px 0 rgba(255, 255, 255, 0.35) inset;
+      background: transparent;
+    }
+
+    .immersive-step__panel img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: min(19vw, 200px);
+      max-height: min(44vh, 400px);
+    }
+
+    .immersive-step__text {
+      flex: 0 1 auto;
+      min-width: 0;
+      align-self: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(4px, 0.9vw, 10px);
+    }
+
+    .immersive-step__en {
+      font-family: var(--font);
+      font-size: clamp(9px, 1vw, 11px);
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(48, 48, 54, 0.52);
+      margin-bottom: clamp(8px, 1.5vw, 14px);
+    }
+
+    .immersive-step__zh {
+      writing-mode: horizontal-tb;
+      text-orientation: mixed;
+      font-family: "Cormorant SC", "Noto Serif SC", "Songti SC", serif;
+      font-size: clamp(10px, 1.15vw, 12px);
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      line-height: 1.65;
+      color: rgba(38, 38, 44, 0.82);
+      white-space: normal;
+      max-width: 12em;
+      max-height: none;
+      overflow: visible;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .immersive-step .immersive-step__bundle {
+        transform: none !important;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .immersive-scroll__row {
+        justify-content: flex-start;
+        padding-bottom: 8px;
+        gap: 10px;
+      }
+
+      .immersive-step__bundle {
+        max-width: min(42vw, 168px);
+      }
+
+      .immersive-step__panel img {
+        max-width: min(42vw, 168px);
+      }
+
+      .immersive-step__zh {
+        letter-spacing: 0.08em;
+        line-height: 1.75;
+        max-width: 11em;
+      }
+
+      .immersive-scroll__warm,
+      .immersive-scroll__cool,
+      .immersive-scroll__grain {
+        background-attachment: scroll;
       }
     }
 
@@ -983,6 +1241,9 @@
 
     <section class="split-flip-section" id="atmosphere" lang="zh-CN" aria-labelledby="split-flip-heading">
       <header class="split-flip-intro">
+        <div class="split-flip-intro__hero" aria-hidden="true">
+          <img src="images/Shoin-Room-Shoji.png" alt="" width="1600" height="900" decoding="async" />
+        </div>
         <h2 id="split-flip-heading" class="split-flip-intro__title">天地人香境</h2>
         <p class="split-flip-intro__line">以有形之香，缔造无形道场；借由内朝圣之路，达成天地人合一。</p>
         <p class="split-flip-intro__line">一炷香，便是一方移动的道场。</p>
@@ -1019,6 +1280,84 @@
               <button type="button" class="flip-module__dot" role="tab" aria-selected="false" aria-label="Image 2 of 2"></button>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="immersive-scroll" id="immersive-story" lang="zh-CN" aria-labelledby="immersive-scroll-heading" data-immersive-scroll>
+      <div class="immersive-scroll__field" aria-hidden="true">
+        <div class="immersive-scroll__warm"></div>
+        <div class="immersive-scroll__cool"></div>
+        <div class="immersive-scroll__mist"></div>
+        <div class="immersive-scroll__grain"></div>
+      </div>
+      <div class="immersive-scroll__inner">
+        <h2 id="immersive-scroll-heading" class="visually-hidden">香境行旅</h2>
+        <div class="immersive-scroll__preface">
+          <p class="immersive-scroll__preface-line">心系天下，与宇宙同频。</p>
+          <p class="immersive-scroll__preface-line">福山，您的内在朝圣之路</p>
+        </div>
+
+        <div class="immersive-scroll__row">
+          <article class="immersive-step immersive-step--from-left" data-immersive-step data-step="1">
+            <div class="immersive-step__bundle">
+              <figure class="immersive-step__panel">
+                <img src="images/immersive-panel-1.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
+              </figure>
+              <div class="immersive-step__text">
+                <p class="immersive-step__en">Relax &amp; Unwind</p>
+                <p class="immersive-step__zh">晨光初透，香起無聲。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="immersive-step immersive-step--from-right" data-immersive-step data-step="2">
+            <div class="immersive-step__bundle">
+              <figure class="immersive-step__panel">
+                <img src="images/immersive-panel-2.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
+              </figure>
+              <div class="immersive-step__text">
+                <p class="immersive-step__en">Stillness</p>
+                <p class="immersive-step__zh">一縷煙，萬象寂。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="immersive-step immersive-step--from-left" data-immersive-step data-step="3">
+            <div class="immersive-step__bundle">
+              <figure class="immersive-step__panel">
+                <img src="images/immersive-panel-3.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
+              </figure>
+              <div class="immersive-step__text">
+                <p class="immersive-step__en">Depth</p>
+                <p class="immersive-step__zh">息深處，境自開。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="immersive-step immersive-step--from-right" data-immersive-step data-step="4">
+            <div class="immersive-step__bundle">
+              <figure class="immersive-step__panel">
+                <img src="images/immersive-panel-4.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
+              </figure>
+              <div class="immersive-step__text">
+                <p class="immersive-step__en">Sanctuary</p>
+                <p class="immersive-step__zh">方寸之地，即是道場。</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="immersive-step immersive-step--from-left" data-immersive-step data-step="5">
+            <div class="immersive-step__bundle">
+              <figure class="immersive-step__panel">
+                <img src="images/immersive-panel-5.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
+              </figure>
+              <div class="immersive-step__text">
+                <p class="immersive-step__en">Return</p>
+                <p class="immersive-step__zh">天清地寧，人歸於靜。</p>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -1267,6 +1606,86 @@
       }
 
       document.querySelectorAll("[data-flip-module]").forEach(mountFlip);
+    })();
+
+    (function () {
+      const root = document.querySelector("[data-immersive-scroll]");
+      if (!root) return;
+
+      const steps = root.querySelectorAll("[data-immersive-step]");
+      var mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      function updateImmersiveField() {
+        const rect = root.getBoundingClientRect();
+        const vh = window.innerHeight;
+        var range = rect.height + vh;
+        var passed = vh - rect.top;
+        var p = passed / range;
+        if (p < 0) p = 0;
+        if (p > 1) p = 1;
+        root.style.setProperty("--iz-scroll", String(p));
+      }
+
+      function updateImmersiveStepReveal() {
+        if (mqReduce.matches) {
+          steps.forEach(function (el) {
+            el.style.setProperty("--immersive-reveal", "1");
+          });
+          return;
+        }
+        const rect = root.getBoundingClientRect();
+        const vh = window.innerHeight;
+        var total = vh + rect.height;
+        if (total <= 0) total = 1;
+        var p = (vh - rect.top) / total;
+        if (p < 0) p = 0;
+        if (p > 1) p = 1;
+        var n = steps.length;
+        var slot = p * n;
+        steps.forEach(function (step, i) {
+          var u = slot - i;
+          if (u < 0) u = 0;
+          else if (u > 1) u = 1;
+          step.style.setProperty("--immersive-reveal", u.toFixed(4));
+        });
+      }
+
+      var ticking = false;
+      function onScrollOrResize() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function () {
+          updateImmersiveField();
+          updateImmersiveStepReveal();
+          ticking = false;
+        });
+      }
+
+      /* Less vertical travel per wheel tick when pointer is over this section — keeps reveal pace readable */
+      root.addEventListener(
+        "wheel",
+        function (e) {
+          if (mqReduce.matches) return;
+          if (!root.contains(e.target)) return;
+          if (e.ctrlKey) return;
+          e.preventDefault();
+          var vh = window.innerHeight;
+          var factor = 0.38;
+          if (e.deltaMode === 1) factor *= 16;
+          else if (e.deltaMode === 2) factor *= vh;
+          window.scrollBy(0, e.deltaY * factor);
+        },
+        { passive: false }
+      );
+
+      window.addEventListener("scroll", onScrollOrResize, { passive: true });
+      window.addEventListener("resize", onScrollOrResize);
+      if (typeof mqReduce.addEventListener === "function") {
+        mqReduce.addEventListener("change", onScrollOrResize);
+      } else {
+        mqReduce.addListener(onScrollOrResize);
+      }
+      onScrollOrResize();
     })();
   </script>
 </body>
