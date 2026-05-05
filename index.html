@@ -279,7 +279,53 @@
       font-size: 10px;
       font-weight: 700;
       letter-spacing: 0.06em;
-      cursor: default;
+      cursor: pointer;
+    }
+
+    .language-switch {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .language-switch__menu {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      width: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      background: rgba(20, 20, 20, 0.92);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      padding: 0;
+      display: none;
+      z-index: 40;
+    }
+
+    .language-switch.is-open .language-switch__menu {
+      display: block;
+    }
+
+    .language-switch__option {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+    }
+
+    .language-switch__option:hover,
+    .language-switch__option:focus-visible {
+      background: rgba(255, 255, 255, 0.12);
+      outline: none;
     }
 
     .region-pill .chev {
@@ -812,6 +858,10 @@
       overflow: visible;
     }
 
+    html[lang="en"] .immersive-step__zh {
+      min-height: 5.4em;
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .immersive-step__bundle {
         opacity: 1 !important;
@@ -1340,7 +1390,10 @@
             <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5" /><path d="M6 20v-1a6 6 0 0112 0v1" /></svg>
           </button>
           <span class="header-tools__divider" aria-hidden="true"></span>
-          <span class="region-pill">US <span class="chev" aria-hidden="true">▼</span></span>
+          <div class="language-switch" id="languageSwitch">
+            <button type="button" class="region-pill" id="languageToggle" aria-label="Switch language" aria-haspopup="listbox" aria-expanded="false">US <span class="chev" aria-hidden="true">▼</span></button>
+            <div class="language-switch__menu" id="languageMenu" role="listbox" aria-label="Available languages"></div>
+          </div>
           <span class="header-tools__divider" aria-hidden="true"></span>
           <a href="#" class="icon-btn" aria-label="Shopping bag">
             <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h15l-1.5 13H7.5L6 8z" /><path d="M9 8V6a3 3 0 016 0v2" /></svg>
@@ -1792,6 +1845,264 @@
       }
 
       onScrollOrResize();
+    })();
+
+    (function () {
+      var toggle = document.getElementById("languageToggle");
+      if (!toggle) return;
+      var switchWrap = document.getElementById("languageSwitch");
+      var menu = document.getElementById("languageMenu");
+
+      var STORAGE_KEY = "fumount-lang";
+      var html = document.documentElement;
+
+      var navLinks = document.querySelectorAll(".nav-row a");
+      var splitLines = document.querySelectorAll(".split-flip-intro__line");
+      var immersiveEn = document.querySelectorAll(".immersive-step__en");
+      var immersiveZh = document.querySelectorAll(".immersive-step__zh");
+      var productTitles = document.querySelectorAll(".product-card h3");
+      var badgeSale = document.querySelectorAll(".badge-sale");
+      var leftDots = document.querySelectorAll(".flip-module__dots[aria-label='Left gallery slides'] .flip-module__dot");
+      var rightDots = document.querySelectorAll(".flip-module__dots[aria-label='Right gallery slides'] .flip-module__dot");
+
+      var dict = {
+        en: {
+          languageButton: "US",
+          languageButtonLabel: "Switch to Chinese",
+          announcement: "Welcome to Fúmount — visual demo, not a live store",
+          navAria: "Primary",
+          nav: ["Collections", "Gift sets", "For him", "For her", "Best sellers", "Blog", "Who we are", "Contact"],
+          searchAria: "Search",
+          accountAria: "Account",
+          bagAria: "Shopping bag",
+          logoAria: "Fúmount home",
+          heroAria: "Featured campaign",
+          heroKicker: "New campaign",
+          heroTitle: "The incense collection",
+          heroCta: "Shop now",
+          splitTitle: "Harmony of Heaven, Earth & Humanity",
+          splitLines: [
+            "With tangible fragrance, an intangible sanctuary is formed; through the inward path of pilgrimage, the unity of Heaven, Earth, and Human is realized.",
+            "A single stick of incense becomes a moving field of practice.",
+            "Guided by scent, a boundary is quietly drawn wherever one stands; through the breath, awareness turns inward on a sacred journey.",
+            "Between each inhale and exhale, one awakens to the \"Human\" in the present, rooted in the depth of \"Earth,\" resonant with the clarity of \"Heaven.\"",
+            "Where smoke rises, there is cultivation; within a small space, Heaven, Earth, and Human return to their rightful harmony."
+          ],
+          leftGalleryAria: "Left gallery slides",
+          rightGalleryAria: "Right gallery slides",
+          leftDotLabels: ["Image 1 of 2", "Image 2 of 2"],
+          rightDotLabels: ["Image 1 of 2", "Image 2 of 2"],
+          immersiveHeading: "Incense Journey",
+          immersivePreface1: "Where incense rises, practice begins; in a small space, heaven, earth and humanity return to place.",
+          immersivePreface2: "Hold the world in your heart, and resonate with the universe.",
+          immersivePreface3: "Fúmount, your inward pilgrimage path",
+          immersiveEn: ["Relax & Unwind", "Stillness", "Depth", "Sanctuary", "Return"],
+          immersiveZh: [
+            "Morning light appears; the first incense awakens.",
+            "One wisp of smoke, and all grows quiet.",
+            "Breathe deeply, and the inner scene opens.",
+            "A small space can become a sanctuary.",
+            "Heaven clears, earth settles, and the self returns to calm."
+          ],
+          productsTitle: "Best sellers",
+          productsSub: "Find your inner peace with our exclusive incense collection.",
+          badgeSale: "PayDay Sale",
+          productNames: ["HOOKED AZURE", "EXOTIC - Heritage", "EXOTIC Paradise", "HOOKED POUR HOMME"],
+          viewAll: "View all",
+          followShop: "Follow on shop",
+          policiesTitle: "Policies",
+          policyItems: ["Terms of Service", "Privacy Policy", "Shipping Policy", "Refund Policy"],
+          moreTitle: "Find out more",
+          moreItems: ["About us", "Contact us", "Stockists", "Press"],
+          footerCopy: "© 2026, Fúmount · All rights reserved · Demo store · Inspired by <a href=\"https://us.ruebrocaparfums.com/\">Rue Broca</a> (not affiliated)"
+        },
+        zh: {
+          languageButton: "中文",
+          languageButtonLabel: "切换为英文",
+          announcement: "欢迎来到 Fúmount — 视觉演示站点，非真实商店",
+          navAria: "主导航",
+          nav: ["系列", "礼盒", "男士", "女士", "畅销", "博客", "关于我们", "联系我们"],
+          searchAria: "搜索",
+          accountAria: "账户",
+          bagAria: "购物袋",
+          logoAria: "Fúmount 首页",
+          heroAria: "主推活动",
+          heroKicker: "全新系列",
+          heroTitle: "福山香境系列",
+          heroCta: "立即选购",
+          splitTitle: "天地人香境",
+          splitLines: [
+            "以有形之香，缔造无形道场；借由内朝圣之路，达成天地人合一。",
+            "一炷香，便是一方移动的道场。",
+            "以香为引，随地结界；以息为观，向内朝圣。",
+            "在呼吸之间，觉知「人」在当下，承接「地」之厚重，感应「天」之清远。",
+            "烟火起处，即是修行；方寸之间，天地人归位。"
+          ],
+          leftGalleryAria: "左侧画廊轮播",
+          rightGalleryAria: "右侧画廊轮播",
+          leftDotLabels: ["第 1 张 / 共 2 张", "第 2 张 / 共 2 张"],
+          rightDotLabels: ["第 1 张 / 共 2 张", "第 2 张 / 共 2 张"],
+          immersiveHeading: "香境行旅",
+          immersivePreface1: "烟火起处，即是修行；方寸之间，天地人归位。",
+          immersivePreface2: "心系天下，与宇宙同频。",
+          immersivePreface3: "福山，您的内在朝圣之路",
+          immersiveEn: ["松弛安住", "静定", "深境", "心域", "归返"],
+          immersiveZh: [
+            "晨光初透，香起无声。",
+            "一缕烟，万象寂。",
+            "息愈盛，境自开。",
+            "方寸之地，即是道场。",
+            "天清地宁，人归于静。"
+          ],
+          productsTitle: "畅销精选",
+          productsSub: "以福山香境系列，寻回您内在的平和与专注。",
+          badgeSale: "限时优惠",
+          productNames: ["钩蓝之韵", "异域·传承", "异域·乐园", "钩蓝·男士"],
+          viewAll: "查看全部",
+          followShop: "关注店铺",
+          policiesTitle: "政策说明",
+          policyItems: ["服务条款", "隐私政策", "配送政策", "退款政策"],
+          moreTitle: "了解更多",
+          moreItems: ["关于我们", "联系我们", "门店信息", "媒体资料"],
+          footerCopy: "© 2026, Fúmount · 保留所有权利 · 演示站点 · 灵感来源 <a href=\"https://us.ruebrocaparfums.com/\">Rue Broca</a>（无关联）"
+        }
+      };
+
+      function setText(selector, value) {
+        var el = document.querySelector(selector);
+        if (el) el.textContent = value;
+      }
+
+      function setEach(nodeList, values) {
+        nodeList.forEach(function (el, idx) {
+          if (values[idx] != null) el.textContent = values[idx];
+        });
+      }
+
+      function applyLanguage(lang) {
+        var d = dict[lang] || dict.en;
+        toggle.setAttribute("data-lang", lang);
+        toggle.setAttribute("aria-label", d.languageButtonLabel);
+        html.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+
+        var labelNode = toggle.childNodes[0];
+        if (labelNode) labelNode.nodeValue = d.languageButton + " ";
+
+        setText(".announcement", d.announcement);
+        setText(".hero-slide__kicker", d.heroKicker);
+        setText(".hero-slide__title", d.heroTitle);
+        setText(".btn-shop", d.heroCta);
+        setText("#split-flip-heading", d.splitTitle);
+        setEach(splitLines, d.splitLines);
+        setText("#immersive-scroll-heading", d.immersiveHeading);
+        setText(".immersive-scroll__preface-line", d.immersivePreface1);
+        setText(".immersive-scroll__preface-line--secondary", d.immersivePreface2);
+        setText(".immersive-scroll__preface-line--lead", d.immersivePreface3);
+        setEach(immersiveEn, d.immersiveEn);
+        setEach(immersiveZh, d.immersiveZh);
+        setText(".rb-section-products h2", d.productsTitle);
+        setText(".rb-section-products .sub", d.productsSub);
+        setEach(badgeSale, [d.badgeSale, d.badgeSale, d.badgeSale, d.badgeSale]);
+        setEach(productTitles, d.productNames);
+        setText(".view-all", d.viewAll);
+        var followShop = document.querySelector(".footer-follow-shop");
+        if (followShop) {
+          var followSvg = followShop.querySelector("svg");
+          if (followSvg) {
+            followShop.innerHTML = followSvg.outerHTML + " " + d.followShop;
+          } else {
+            followShop.textContent = d.followShop;
+          }
+        }
+        setText(".footer-col:nth-of-type(1) h3", d.policiesTitle);
+        setEach(document.querySelectorAll(".footer-col:nth-of-type(1) li a"), d.policyItems);
+        setText(".footer-col:nth-of-type(2) h3", d.moreTitle);
+        setEach(document.querySelectorAll(".footer-col:nth-of-type(2) li a"), d.moreItems);
+        var footerCopy = document.querySelector(".footer-copy");
+        if (footerCopy) footerCopy.innerHTML = d.footerCopy;
+
+        var nav = document.querySelector(".nav-row");
+        if (nav) nav.setAttribute("aria-label", d.navAria);
+        navLinks.forEach(function (link, idx) {
+          if (d.nav[idx] == null) return;
+          if (idx === 0) {
+            link.innerHTML = d.nav[idx] + ' <span class="nav-row__chev" aria-hidden="true">⌵</span>';
+          } else {
+            link.textContent = d.nav[idx];
+          }
+        });
+
+        var hero = document.querySelector(".hero-slide");
+        if (hero) hero.setAttribute("aria-label", d.heroAria);
+        var split = document.querySelector(".split-flip-section");
+        if (split) split.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+        var immersive = document.querySelector(".immersive-scroll");
+        if (immersive) immersive.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+        var logo = document.querySelector(".logo");
+        if (logo) logo.setAttribute("aria-label", d.logoAria);
+        var search = document.querySelector(".header-search-btn");
+        if (search) search.setAttribute("aria-label", d.searchAria);
+        var account = document.querySelector(".header-tools .icon-btn[aria-label]");
+        if (account) account.setAttribute("aria-label", d.accountAria);
+        var bag = document.querySelector(".header-tools a.icon-btn");
+        if (bag) bag.setAttribute("aria-label", d.bagAria);
+
+        var leftDotsWrap = document.querySelector(".flip-module__dots[aria-label='Left gallery slides'], .flip-module__dots[aria-label='左侧画廊轮播']");
+        var rightDotsWrap = document.querySelector(".flip-module__dots[aria-label='Right gallery slides'], .flip-module__dots[aria-label='右侧画廊轮播']");
+        if (leftDotsWrap) leftDotsWrap.setAttribute("aria-label", d.leftGalleryAria);
+        if (rightDotsWrap) rightDotsWrap.setAttribute("aria-label", d.rightGalleryAria);
+        setEach(leftDots, d.leftDotLabels);
+        setEach(rightDots, d.rightDotLabels);
+
+        try {
+          localStorage.setItem(STORAGE_KEY, lang);
+        } catch (e) {}
+
+        renderLanguageMenu(lang);
+      }
+
+      function renderLanguageMenu(currentLang) {
+        if (!menu) return;
+        var targetLang = currentLang === "en" ? "zh" : "en";
+        var optionLabel = targetLang === "en" ? "English" : "中文";
+        menu.innerHTML =
+          '<button type="button" class="language-switch__option" data-lang="' +
+          targetLang +
+          '" role="option">' +
+          optionLabel +
+          "</button>";
+      }
+
+      toggle.addEventListener("click", function () {
+        if (!switchWrap) return;
+        var nextOpen = !switchWrap.classList.contains("is-open");
+        switchWrap.classList.toggle("is-open", nextOpen);
+        toggle.setAttribute("aria-expanded", nextOpen ? "true" : "false");
+      });
+
+      if (menu) {
+        menu.addEventListener("click", function (event) {
+          var option = event.target.closest(".language-switch__option");
+          if (!option) return;
+          applyLanguage(option.getAttribute("data-lang"));
+          if (switchWrap) switchWrap.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      }
+
+      document.addEventListener("click", function (event) {
+        if (!switchWrap) return;
+        if (switchWrap.contains(event.target)) return;
+        switchWrap.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+      });
+
+      var initial = "en";
+      try {
+        var cached = localStorage.getItem(STORAGE_KEY);
+        if (cached === "en" || cached === "zh") initial = cached;
+      } catch (e) {}
+      applyLanguage(initial);
     })();
   </script>
 </body>
