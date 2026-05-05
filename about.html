@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fúmount — Home incense</title>
+  <title>Fúmount — About</title>
   <link rel="icon" href="images/logo.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1478,9 +1478,119 @@
         transform: scaleX(1);
       }
     }
+
+    /* About subpage — same chrome as home; dark canvas + inset hero image (full photo, not cropped) */
+    body.page-about {
+      background: #121212;
+      color: #fff;
+    }
+
+    .about-page-main {
+      padding-top: calc(var(--announce-h) + var(--header-main-h));
+      background: #121212;
+    }
+
+    .about-hero-wrap {
+      max-width: min(920px, calc(100% - var(--pad) * 2));
+      margin: 0 auto;
+      padding: clamp(16px, 3vw, 28px) 0 clamp(10px, 2vw, 20px);
+    }
+
+    .about-hero-figure {
+      margin: 0;
+    }
+
+    .about-hero-wrap img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+    }
+
+    .about-copy {
+      background: #141414;
+      color: #fff;
+      padding: clamp(48px, 8vw, 100px) var(--pad) clamp(56px, 10vw, 120px);
+    }
+
+    .about-copy__inner {
+      max-width: min(52rem, 94vw);
+      margin: 0 auto;
+      text-align: center;
+      font-family: "Cormorant SC", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+    }
+
+    .about-copy__title {
+      font-family: "Cormorant SC", var(--font-logo), "Noto Serif SC", serif;
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      color: rgba(255, 255, 255, 0.96);
+      margin: 0 0 clamp(22px, 3.5vw, 40px);
+      font-feature-settings: "kern" 1;
+    }
+
+    .about-copy__body {
+      font-size: clamp(14px, 1.35vw, 18px);
+      line-height: 2;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.78);
+      letter-spacing: 0.04em;
+    }
+
+    html[lang="en"] .about-copy__body {
+      letter-spacing: 0.02em;
+      font-family: "Cormorant SC", Georgia, "Times New Roman", serif;
+    }
+
+    .about-copy__para {
+      margin: 0 0 1.15em;
+    }
+
+    .about-copy__para:last-child {
+      margin-bottom: 0;
+    }
+
+    .about-contact {
+      scroll-margin-top: calc(var(--announce-h) + var(--header-main-h) + 16px);
+      background: #121212;
+      padding: clamp(40px, 7vw, 72px) var(--pad) clamp(48px, 8vw, 88px);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .about-contact__inner {
+      max-width: min(42rem, 94vw);
+      margin: 0 auto;
+      text-align: center;
+      font-family: "Cormorant SC", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
+    }
+
+    .about-contact__title {
+      font-family: "Cormorant SC", var(--font-logo), "Noto Serif SC", serif;
+      font-size: clamp(18px, 2.4vw, 24px);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.94);
+      margin: 0 0 clamp(14px, 2vw, 22px);
+    }
+
+    .about-contact__placeholder {
+      font-size: clamp(13px, 1.25vw, 16px);
+      line-height: 1.85;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.52);
+      letter-spacing: 0.06em;
+      margin: 0;
+    }
+
+    html[lang="en"] .about-contact__placeholder {
+      letter-spacing: 0.03em;
+      font-family: "Cormorant SC", Georgia, "Times New Roman", serif;
+    }
   </style>
 </head>
-<body>
+<body class="page-about">
   <p class="announcement">Welcome to Fúmount — visual demo, not a live store</p>
 
   <header class="site-header" id="siteHeader">
@@ -1488,7 +1598,7 @@
       <nav class="nav-row" aria-label="Primary">
         <div class="nav-row__cluster">
           <div class="nav-collections">
-            <a href="#collections" class="nav-collections__trigger nav-row__collections-link">Collections <span class="nav-row__chev" aria-hidden="true">⌵</span></a>
+            <a href="index.html#collections" class="nav-collections__trigger nav-row__collections-link">Collections <span class="nav-row__chev" aria-hidden="true">⌵</span></a>
             <ul class="nav-collections__menu" aria-label="Collections list">
               <li><button type="button" class="nav-collections__item">Series 1</button></li>
               <li><button type="button" class="nav-collections__item">Series 2</button></li>
@@ -1497,13 +1607,13 @@
             </ul>
           </div>
           <div class="nav-row__strip">
-            <a href="#shop">Gift sets</a>
-            <a href="#shop">For him</a>
-            <a href="#shop">For her</a>
-            <a href="#shop">Best sellers</a>
-            <a href="#">Blog</a>
-            <a href="about.html">Who we are</a>
-            <a href="about.html#contact-us">Contact</a>
+            <a href="index.html#shop">Gift sets</a>
+            <a href="index.html#shop">For him</a>
+            <a href="index.html#shop">For her</a>
+            <a href="index.html#shop">Best sellers</a>
+            <a href="index.html">Blog</a>
+            <a href="about.html" aria-current="page">Who we are</a>
+            <a href="#contact-us">Contact</a>
           </div>
         </div>
       </nav>
@@ -1516,7 +1626,7 @@
           <span class="header-search-underline" aria-hidden="true"></span>
         </div>
 
-        <a href="#" class="logo" aria-label="Fúmount home">
+        <a href="index.html" class="logo" aria-label="Fúmount home">
           <img class="logo__mark" src="images/logo.png" alt="" width="240" height="240" decoding="async" />
           <span class="logo__word">Fúmount</span>
         </a>
@@ -1539,199 +1649,48 @@
     </div>
   </header>
 
-  <main id="collections">
-    <section class="hero-slide" aria-label="Featured campaign">
-      <div class="hero-slide__media">
-        <img src="images/rue-home-1.png" alt="" width="1280" height="1600" fetchpriority="high" decoding="async" />
-      </div>
-      <div class="hero-slide__content">
-        <p class="hero-slide__kicker">New campaign</p>
-        <h1 class="hero-slide__title">The incense collection</h1>
-        <a class="btn-shop" href="#shop">Shop now</a>
-      </div>
-    </section>
+  <main class="about-page-main">
+    <div class="about-hero-wrap">
+      <figure class="about-hero-figure">
+        <img src="images/hi.png" alt="" width="1200" height="2400" decoding="async" />
+      </figure>
+    </div>
 
-    <section class="split-flip-section" id="atmosphere" lang="zh-CN" aria-labelledby="split-flip-heading">
-      <header class="split-flip-intro">
-        <div class="split-flip-intro__hero" aria-hidden="true">
-          <img src="images/Shoin-Room-Shoji.png" alt="" width="1600" height="900" decoding="async" />
-        </div>
-        <h2 id="split-flip-heading" class="split-flip-intro__title">天地人香境</h2>
-        <p class="split-flip-intro__line">以有形之香，缔造无形道场；借由内朝圣之路，达成天地人合一。</p>
-        <p class="split-flip-intro__line">一炷香，便是一方移动的道场。</p>
-        <p class="split-flip-intro__line">以香为引，随地结界；以息为观，向内朝圣。</p>
-        <p class="split-flip-intro__line">在呼吸之间，觉知「人」在当下，承接「地」之厚重，感应「天」之清远。</p>
-        <p class="split-flip-intro__line">烟火起处，即是修行；方寸之间，天地人归位。</p>
-      </header>
-      <div class="split-flip-section__grid">
-        <div class="flip-module" data-flip-module>
-          <div class="flip-module__viewport">
-            <div class="flip-module__slide is-active">
-              <img src="images/atmosphere-1.png" alt="" width="1200" height="1200" decoding="async" />
-            </div>
-            <div class="flip-module__slide">
-              <img src="images/atmosphere-2.png" alt="" width="1200" height="1200" loading="lazy" decoding="async" />
-            </div>
-            <div class="flip-module__dots" role="tablist" aria-label="Left gallery slides">
-              <button type="button" class="flip-module__dot is-active" role="tab" aria-selected="true" aria-label="Image 1 of 2"></button>
-              <button type="button" class="flip-module__dot" role="tab" aria-selected="false" aria-label="Image 2 of 2"></button>
-            </div>
-          </div>
-        </div>
-
-        <div class="flip-module" data-flip-module>
-          <div class="flip-module__viewport">
-            <div class="flip-module__slide is-active">
-              <img src="images/atmosphere-3.png" alt="" width="1200" height="1200" decoding="async" />
-            </div>
-            <div class="flip-module__slide">
-              <img src="images/atmosphere-4.png" alt="" width="1200" height="1200" loading="lazy" decoding="async" />
-            </div>
-            <div class="flip-module__dots" role="tablist" aria-label="Right gallery slides">
-              <button type="button" class="flip-module__dot is-active" role="tab" aria-selected="true" aria-label="Image 1 of 2"></button>
-              <button type="button" class="flip-module__dot" role="tab" aria-selected="false" aria-label="Image 2 of 2"></button>
-            </div>
-          </div>
+    <section class="about-copy" id="about-copy" aria-labelledby="about-heading">
+      <div class="about-copy__inner">
+        <h1 id="about-heading" class="about-copy__title">Who we are</h1>
+        <div class="about-copy__body">
+          <p class="about-copy__para">
+            Fúmount uses incense—a tangible medium—to shape an intimate, invisible field for you in every breath.
+          </p>
+          <p class="about-copy__para">
+            This is not about taking from the world; it is a pilgrimage that turns inward.
+          </p>
+          <p class="about-copy__para">
+            Along the way, fragrance clears distraction and steadies the mind, until you can hear your true inner voice and glimpse the wisdom already within you.
+          </p>
+          <p class="about-copy__para">
+            Each lighting is a deep conversation with yourself; each thread of scent is a lamp on the path of growth.
+          </p>
+          <p class="about-copy__para">
+            Fúmount offers no instant answers—only companionship and space—so that amid life’s noise you may walk an inward path and grow in what is real.
+          </p>
+          <p class="about-copy__para">
+            The span of one stick of incense: a quiet ground, and a meeting with who you truly are.
+          </p>
+          <p class="about-copy__para">
+            Fúmount witnesses every inward leap you make. Practice is not on a distant mountain—it lives in each present moment. Fúmount Classics are everyday rituals within reach, helping you settle body‑and‑mind quickly and recover your own rhythm in a crowded world.
+          </p>
         </div>
       </div>
     </section>
 
-    <section class="immersive-scroll" id="immersive-story" lang="zh-CN" aria-labelledby="immersive-scroll-heading" data-immersive-scroll>
-      <div class="immersive-scroll__field" aria-hidden="true">
-        <div class="immersive-scroll__paper"></div>
-        <div class="immersive-scroll__frost"></div>
-        <div class="immersive-scroll__grain"></div>
-      </div>
-      <div class="immersive-scroll__inner">
-        <h2 id="immersive-scroll-heading" class="visually-hidden">香境行旅</h2>
-        <div class="immersive-scroll__preface">
-          <p class="immersive-scroll__preface-line">烟火起处，即是修行；方寸之间，天地人归位。</p>
-          <p class="immersive-scroll__preface-line immersive-scroll__preface-line--secondary">心系天下，与宇宙同频。</p>
-          <p class="immersive-scroll__preface-line immersive-scroll__preface-line--lead">福山，您的内在朝圣之路</p>
-        </div>
-
-        <div class="immersive-scroll__row">
-          <article class="immersive-step" data-immersive-step data-step="1">
-            <div class="immersive-step__bundle">
-              <figure class="immersive-step__panel">
-                <img src="images/immersive-panel-1.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
-              </figure>
-              <div class="immersive-step__text">
-                <p class="immersive-step__en">Relax &amp; Unwind</p>
-                <p class="immersive-step__zh">晨光初透，香起無聲。</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="immersive-step" data-immersive-step data-step="2">
-            <div class="immersive-step__bundle">
-              <figure class="immersive-step__panel">
-                <img src="images/immersive-panel-2.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
-              </figure>
-              <div class="immersive-step__text">
-                <p class="immersive-step__en">Stillness</p>
-                <p class="immersive-step__zh">一縷煙，萬象寂。</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="immersive-step" data-immersive-step data-step="3">
-            <div class="immersive-step__bundle">
-              <figure class="immersive-step__panel">
-                <img src="images/immersive-panel-3.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
-              </figure>
-              <div class="immersive-step__text">
-                <p class="immersive-step__en">Depth</p>
-                <p class="immersive-step__zh">息深處，境自開。</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="immersive-step" data-immersive-step data-step="4">
-            <div class="immersive-step__bundle">
-              <figure class="immersive-step__panel">
-                <img src="images/immersive-panel-4.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
-              </figure>
-              <div class="immersive-step__text">
-                <p class="immersive-step__en">Sanctuary</p>
-                <p class="immersive-step__zh">方寸之地，即是道場。</p>
-              </div>
-            </div>
-          </article>
-
-          <article class="immersive-step" data-immersive-step data-step="5">
-            <div class="immersive-step__bundle">
-              <figure class="immersive-step__panel">
-                <img src="images/immersive-panel-5.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
-              </figure>
-              <div class="immersive-step__text">
-                <p class="immersive-step__en">Return</p>
-                <p class="immersive-step__zh">天清地寧，人歸於靜。</p>
-              </div>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="rb-section-products" id="shop">
-      <div class="rb-section-products__inner">
-        <h2>Best sellers</h2>
-        <p class="sub">Find your inner peace with our exclusive incense collection.</p>
-
-        <div class="product-grid">
-          <article class="product-card">
-            <div class="product-card__visual">
-              <span class="badge-sale">PayDay Sale</span>
-              <img src="images/catalogue-1.png" alt="" width="600" height="600" />
-            </div>
-            <h3>HOOKED AZURE</h3>
-            <div class="rb-price">
-              <span class="rb-price__now">$28.00 USD</span>
-              <span class="rb-price__was">$34.99 USD</span>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-card__visual">
-              <span class="badge-sale">PayDay Sale</span>
-              <img src="images/catalogue-2.png" alt="" width="600" height="600" />
-            </div>
-            <h3>EXOTIC - Heritage</h3>
-            <div class="rb-price">
-              <span class="rb-price__now">$32.00 USD</span>
-              <span class="rb-price__was">$39.99 USD</span>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-card__visual">
-              <span class="badge-sale">PayDay Sale</span>
-              <img src="images/catalogue-3.png" alt="" width="600" height="600" />
-            </div>
-            <h3>EXOTIC Paradise</h3>
-            <div class="rb-price">
-              <span class="rb-price__now">$34.00 USD</span>
-              <span class="rb-price__was">$41.99 USD</span>
-            </div>
-          </article>
-
-          <article class="product-card">
-            <div class="product-card__visual">
-              <span class="badge-sale">PayDay Sale</span>
-              <img src="images/catalogue-4.png" alt="" width="600" height="600" />
-            </div>
-            <h3>HOOKED POUR HOMME</h3>
-            <div class="rb-price">
-              <span class="rb-price__now">$29.00 USD</span>
-              <span class="rb-price__was">$36.99 USD</span>
-            </div>
-          </article>
-        </div>
-
-        <div class="view-all-wrap">
-          <a class="view-all" href="#">View all</a>
-        </div>
+    <section class="about-contact" id="contact-us" aria-labelledby="contact-us-heading">
+      <div class="about-contact__inner">
+        <h2 id="contact-us-heading" class="about-contact__title">Contact us</h2>
+        <p class="about-contact__placeholder">
+          Placeholder — email, phone, studio hours, and a contact form will appear here.
+        </p>
       </div>
     </section>
   </main>
@@ -1739,9 +1698,9 @@
   <footer class="site-footer-rb">
     <div class="footer-grid">
       <div class="footer-brand">
-        <div class="footer-logo">
+        <a href="index.html" class="footer-logo">
           <span class="footer-logo__word">Fúmount</span>
-        </div>
+        </a>
         <div class="footer-rule"></div>
         <div class="footer-social">
           <a href="#" aria-label="Facebook">f</a>
@@ -1769,7 +1728,7 @@
         <h3>Find out more</h3>
         <ul>
           <li><a href="about.html">About us</a></li>
-          <li><a href="about.html#contact-us">Contact us</a></li>
+          <li><a href="#contact-us">Contact us</a></li>
           <li><a href="#">Stockists</a></li>
           <li><a href="#">Press</a></li>
         </ul>
@@ -2001,11 +1960,26 @@
       var badgeSale = document.querySelectorAll(".badge-sale");
       var leftDots = document.querySelectorAll(".flip-module__dots[aria-label='Left gallery slides'] .flip-module__dot");
       var rightDots = document.querySelectorAll(".flip-module__dots[aria-label='Right gallery slides'] .flip-module__dot");
+      var aboutParas = document.querySelectorAll(".about-copy__para");
 
       var dict = {
         en: {
           languageButton: "US",
           languageButtonLabel: "Switch to Chinese",
+          pageTitle: "Fúmount — About",
+          aboutHeading: "Who we are",
+          aboutParas: [
+            "Fúmount uses incense—a tangible medium—to shape an intimate, invisible field for you in every breath.",
+            "This is not about taking from the world; it is a pilgrimage that turns inward.",
+            "Along the way, fragrance clears distraction and steadies the mind, until you can hear your true inner voice and glimpse the wisdom already within you.",
+            "Each lighting is a deep conversation with yourself; each thread of scent is a lamp on the path of growth.",
+            "Fúmount offers no instant answers—only companionship and space—so that amid life’s noise you may walk an inward path and grow in what is real.",
+            "The span of one stick of incense: a quiet ground, and a meeting with who you truly are.",
+            "Fúmount witnesses every inward leap you make. Practice is not on a distant mountain—it lives in each present moment. Fúmount Classics are everyday rituals within reach, helping you settle body‑and‑mind quickly and recover your own rhythm in a crowded world."
+          ],
+          contactHeading: "Contact us",
+          contactPlaceholder:
+            "Placeholder — email, phone, studio hours, and a contact form will appear here.",
           announcement: "Welcome to Fúmount — visual demo, not a live store",
           navAria: "Primary",
           nav: ["Collections", "Gift sets", "For him", "For her", "Best sellers", "Blog", "Who we are", "Contact"],
@@ -2058,6 +2032,19 @@
         zh: {
           languageButton: "中文",
           languageButtonLabel: "切换为英文",
+          pageTitle: "Fúmount — 关于我们",
+          aboutHeading: "关于我们",
+          aboutParas: [
+            "福山集，以香这一有形之物为媒介，在呼吸吐纳间，为您缔造一个专属的无形场域。",
+            "这并非向外索取，而是一场向内走的朝圣之路。",
+            "在这条路上，香气扫除杂念，安定心神，让您听见内在真实的声音，照见本心的智慧。",
+            "每一次点燃，都是一次与自我的深度对话；每一缕芬芳，都是成长路上的明灯。",
+            "福山集，不提供速成的答案，只提供陪伴与空间，助您在纷扰世界中，走朝圣路，向内求，得真成长。",
+            "一炷香的时间，一方静土，一场与真我的相遇。",
+            "福山集，见证您的每一次内在跃升。修行不在远山，而在每一个当下。福山经典，是您触手可及的日常仪式，帮助您在纷繁世界中，快速安顿身心，找回自己的节奏。"
+          ],
+          contactHeading: "联系我们",
+          contactPlaceholder: "占位说明 — 此处将补充邮箱、电话、开放时间以及留言表单等联系方式。",
           announcement: "欢迎来到 Fúmount — 视觉演示站点，非真实商店",
           navAria: "主导航",
           nav: ["系列", "礼盒", "男士", "女士", "畅销", "博客", "关于我们", "联系我们"],
@@ -2126,6 +2113,8 @@
         toggle.setAttribute("aria-label", d.languageButtonLabel);
         html.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
 
+        document.title = d.pageTitle;
+
         var labelNode = toggle.childNodes[0];
         if (labelNode) labelNode.nodeValue = d.languageButton + " ";
 
@@ -2162,6 +2151,16 @@
         var footerCopy = document.querySelector(".footer-copy");
         if (footerCopy) footerCopy.innerHTML = d.footerCopy;
 
+        setText("#about-heading", d.aboutHeading);
+        setEach(aboutParas, d.aboutParas);
+        var aboutSection = document.getElementById("about-copy");
+        if (aboutSection) aboutSection.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+
+        setText("#contact-us-heading", d.contactHeading);
+        setText(".about-contact__placeholder", d.contactPlaceholder);
+        var contactSection = document.getElementById("contact-us");
+        if (contactSection) contactSection.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+
         var nav = document.querySelector(".nav-row");
         if (nav) nav.setAttribute("aria-label", d.navAria);
         navLinks.forEach(function (link, idx) {
@@ -2170,6 +2169,11 @@
             link.innerHTML = d.nav[idx] + ' <span class="nav-row__chev" aria-hidden="true">⌵</span>';
           } else {
             link.textContent = d.nav[idx];
+          }
+          if (idx === 6 && link.getAttribute("href") === "about.html") {
+            link.setAttribute("aria-current", "page");
+          } else {
+            link.removeAttribute("aria-current");
           }
         });
         setEach(collectionItems, d.collectionItems);
