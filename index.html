@@ -7,7 +7,7 @@
   <link rel="icon" href="images/fumount-logo-mark.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..72,400;6..72,600&family=Cormorant+SC:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..72,400;6..72,600&family=Cormorant+SC:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&family=Oswald:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     *,
     *::before,
@@ -26,6 +26,8 @@
       --rb-announce: #000000;
       --rb-footer: #000000;
       --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --font-product: "Montserrat", "Inter", system-ui, -apple-system, sans-serif;
+      --font-product-head: "Oswald", "Montserrat", system-ui, sans-serif;
       --font-logo: "Bodoni Moda", "Times New Roman", Georgia, serif;
       --pad: clamp(16px, 4vw, 40px);
       /* Nav row + logo row; total height shrinks on scroll */
@@ -553,7 +555,7 @@
       }
     }
 
-    /* Immersive scroll — single horizontal row, slight Y stagger; section scroll drives sequential reveal; wheel damped in-section */
+    /* Immersive — rice-paper field; row enters once: cards drop L→R when section scrolls into view */
     .immersive-scroll {
       --iz-scroll: 0;
       position: relative;
@@ -569,42 +571,45 @@
       pointer-events: none;
     }
 
-    .immersive-scroll__warm {
+    /* 米黄磨砂纸 — warm cream base + soft matte veil + fine grain */
+    .immersive-scroll__paper {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(120% 85% at 20% 16%, rgba(255, 252, 246, 0.5), transparent 54%),
-        linear-gradient(168deg, #ebe4dc 0%, #dfd5cb 44%, #d3cbc3 100%);
+      background-color: #efe8dc;
+      background-image:
+        radial-gradient(ellipse 110% 75% at 50% -5%, rgba(255, 253, 248, 0.95), transparent 52%),
+        repeating-linear-gradient(
+          -12deg,
+          transparent,
+          transparent 3px,
+          rgba(180, 160, 120, 0.025) 3px,
+          rgba(180, 160, 120, 0.025) 4px
+        ),
+        linear-gradient(176deg, #faf6ec 0%, #f0e7d8 40%, #e4d9c8 78%, #dbceb8 100%);
       background-attachment: fixed;
     }
 
-    .immersive-scroll__cool {
+    .immersive-scroll__frost {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(100% 72% at 80% 74%, rgba(226, 232, 240, 0.42), transparent 50%),
-        linear-gradient(192deg, rgba(210, 218, 228, 0.38) 0%, rgba(188, 200, 212, 0.32) 55%, rgba(172, 186, 200, 0.3) 100%);
-      background-attachment: fixed;
-      opacity: calc(0.12 + var(--iz-scroll, 0) * 0.48);
-    }
-
-    /* Light veil — softly diffused, not heavy blur */
-    .immersive-scroll__mist {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse 75% 55% at 50% 42%, rgba(255, 255, 255, 0.14), transparent 68%);
+        linear-gradient(135deg, rgba(255, 255, 255, 0.42) 0%, transparent 38%),
+        linear-gradient(315deg, rgba(255, 252, 245, 0.22) 0%, transparent 45%),
+        radial-gradient(ellipse 90% 65% at 50% 100%, rgba(210, 190, 155, 0.12), transparent 58%);
+      opacity: calc(0.88 + var(--iz-scroll, 0) * 0.12);
       pointer-events: none;
     }
 
     .immersive-scroll__grain {
       position: absolute;
       inset: 0;
-      opacity: 0.06;
+      opacity: 0.1;
       mix-blend-mode: multiply;
       background-image: url("images/immersive-section-bg.png");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
+      filter: sepia(0.2) saturate(0.88);
     }
 
     .immersive-scroll__inner {
@@ -616,22 +621,21 @@
     }
 
     .immersive-scroll__row {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: nowrap;
-      justify-content: center;
-      align-items: flex-end;
-      gap: clamp(6px, 1vw, 14px);
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: clamp(10px, 1.6vw, 20px);
+      align-items: end;
+      justify-items: stretch;
       width: 100%;
       margin: 0 auto;
-      padding: clamp(6px, 1.2vw, 16px) 0 clamp(4px, 1vw, 12px);
-      overflow-x: auto;
-      overflow-y: visible;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
+      padding: clamp(8px, 1.4vw, 18px) 0 clamp(6px, 1vw, 14px);
     }
 
     .immersive-scroll__preface {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(0.55em, 1.5vw, 0.85em);
       text-align: center;
       margin-bottom: clamp(22px, 4vw, 44px);
       padding: 0 clamp(8px, 2vw, 24px);
@@ -645,105 +649,152 @@
       line-height: 1.75;
       color: rgba(36, 36, 42, 0.88);
       margin: 0;
+      max-width: 36em;
     }
 
-    .immersive-scroll__preface-line + .immersive-scroll__preface-line {
-      margin-top: 0.65em;
+    .immersive-scroll__preface-line--secondary {
       font-size: clamp(14px, 1.45vw, 17px);
       letter-spacing: 0.22em;
       color: rgba(42, 42, 48, 0.78);
     }
 
+    .immersive-scroll__preface-line--lead {
+      font-size: clamp(15px, 1.55vw, 18px);
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: rgba(28, 26, 22, 0.92);
+    }
+
+    @keyframes immersive-card-drop {
+      from {
+        opacity: 0;
+        transform: translateY(-44px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     .immersive-step {
       position: relative;
       z-index: 1;
-      --immersive-reveal: 0;
-      flex: 0 0 auto;
-      min-height: 0;
+      min-width: 0;
       margin: 0;
       display: flex;
-      align-items: flex-end;
+      align-items: stretch;
       justify-content: center;
-    }
-
-    /* Minimal vertical ripple along the row */
-    .immersive-scroll__row .immersive-step[data-step="1"] {
-      transform: translateY(0);
-    }
-
-    .immersive-scroll__row .immersive-step[data-step="2"] {
-      transform: translateY(4px);
-    }
-
-    .immersive-scroll__row .immersive-step[data-step="3"] {
-      transform: translateY(8px);
-    }
-
-    .immersive-scroll__row .immersive-step[data-step="4"] {
-      transform: translateY(4px);
-    }
-
-    .immersive-scroll__row .immersive-step[data-step="5"] {
-      transform: translateY(0);
     }
 
     .immersive-step__bundle {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: clamp(8px, 1.4vw, 14px);
-      will-change: transform, opacity;
-      max-width: min(19vw, 200px);
+      justify-content: flex-end;
+      gap: clamp(8px, 1.2vw, 12px);
+      width: 100%;
+      max-width: 100%;
       text-align: center;
-      opacity: var(--immersive-reveal);
+      opacity: 0;
+      transform: translateY(-44px);
     }
 
-    .immersive-step--from-left .immersive-step__bundle {
-      transform: translateX(calc((1 - var(--immersive-reveal)) * -56px));
+    .immersive-scroll.is-in-view .immersive-step[data-step="1"] .immersive-step__bundle {
+      animation: immersive-card-drop 1.2s cubic-bezier(0.25, 0.8, 0.3, 1) forwards;
+      animation-delay: 0ms;
     }
 
-    .immersive-step--from-right .immersive-step__bundle {
-      transform: translateX(calc((1 - var(--immersive-reveal)) * 56px));
+    .immersive-scroll.is-in-view .immersive-step[data-step="2"] .immersive-step__bundle {
+      animation: immersive-card-drop 1.2s cubic-bezier(0.25, 0.8, 0.3, 1) forwards;
+      animation-delay: 0.16s;
     }
 
-    /* Natural image — no crop in frame */
+    .immersive-scroll.is-in-view .immersive-step[data-step="3"] .immersive-step__bundle {
+      animation: immersive-card-drop 1.2s cubic-bezier(0.25, 0.8, 0.3, 1) forwards;
+      animation-delay: 0.32s;
+    }
+
+    .immersive-scroll.is-in-view .immersive-step[data-step="4"] .immersive-step__bundle {
+      animation: immersive-card-drop 1.2s cubic-bezier(0.25, 0.8, 0.3, 1) forwards;
+      animation-delay: 0.48s;
+    }
+
+    .immersive-scroll.is-in-view .immersive-step[data-step="5"] .immersive-step__bundle {
+      animation: immersive-card-drop 1.2s cubic-bezier(0.25, 0.8, 0.3, 1) forwards;
+      animation-delay: 0.64s;
+    }
+
+    /* Uniform frame — same box per column, image contained (no hard crop) */
     .immersive-step__panel {
       margin: 0;
+      width: 100%;
       flex-shrink: 0;
-      border-radius: 5px;
-      overflow: visible;
+      min-height: clamp(140px, 22vw, 220px);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
       box-shadow:
-        0 20px 44px rgba(35, 38, 42, 0.14),
-        0 1px 0 rgba(255, 255, 255, 0.35) inset;
-      background: transparent;
+        0 14px 32px rgba(55, 48, 38, 0.12),
+        0 1px 0 rgba(255, 255, 255, 0.5) inset;
+      background: rgba(255, 252, 246, 0.35);
     }
 
     .immersive-step__panel img {
       display: block;
       width: auto;
       height: auto;
-      max-width: min(19vw, 200px);
-      max-height: min(44vh, 400px);
+      max-width: 100%;
+      max-height: clamp(140px, 22vw, 220px);
+      object-fit: contain;
+      object-position: center center;
     }
 
     .immersive-step__text {
       flex: 0 1 auto;
       min-width: 0;
+      width: 100%;
+      min-height: 4.5em;
       align-self: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: clamp(4px, 0.9vw, 10px);
+      justify-content: flex-start;
+      gap: clamp(4px, 0.85vw, 9px);
     }
 
     .immersive-step__en {
+      position: relative;
+      display: inline-block;
       font-family: var(--font);
       font-size: clamp(9px, 1vw, 11px);
       font-weight: 600;
       letter-spacing: 0.32em;
       text-transform: uppercase;
-      color: rgba(48, 48, 54, 0.52);
-      margin-bottom: clamp(8px, 1.5vw, 14px);
+      color: rgba(72, 64, 52, 0.5);
+      margin: 0;
+      padding-bottom: 6px;
+    }
+
+    .immersive-step__en::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: rgba(48, 42, 36, 0.45);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    .immersive-step:hover .immersive-step__en::after,
+    .immersive-step:focus-within .immersive-step__en::after {
+      transform: scaleX(1);
     }
 
     .immersive-step__zh {
@@ -754,7 +805,7 @@
       font-weight: 500;
       letter-spacing: 0.14em;
       line-height: 1.65;
-      color: rgba(38, 38, 44, 0.82);
+      color: rgba(48, 42, 36, 0.82);
       white-space: normal;
       max-width: 12em;
       max-height: none;
@@ -762,24 +813,47 @@
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .immersive-step .immersive-step__bundle {
+      .immersive-step__bundle {
+        opacity: 1 !important;
         transform: none !important;
+        animation: none !important;
+      }
+
+      .immersive-step__en::after {
+        transition: none;
+      }
+
+      .immersive-step:hover .immersive-step__en::after,
+      .immersive-step:focus-within .immersive-step__en::after {
+        transform: scaleX(1);
       }
     }
 
     @media (max-width: 720px) {
       .immersive-scroll__row {
-        justify-content: flex-start;
-        padding-bottom: 8px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: flex-end;
         gap: 10px;
+        overflow-x: auto;
+        overflow-y: visible;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
       }
 
-      .immersive-step__bundle {
-        max-width: min(42vw, 168px);
+      .immersive-step {
+        flex: 0 0 min(34vw, 150px);
+        max-width: min(34vw, 150px);
+      }
+
+      .immersive-step__panel {
+        min-height: clamp(120px, 36vw, 200px);
       }
 
       .immersive-step__panel img {
-        max-width: min(42vw, 168px);
+        max-height: clamp(120px, 36vw, 200px);
       }
 
       .immersive-step__zh {
@@ -788,16 +862,16 @@
         max-width: 11em;
       }
 
-      .immersive-scroll__warm,
-      .immersive-scroll__cool,
+      .immersive-scroll__paper,
       .immersive-scroll__grain {
         background-attachment: scroll;
       }
     }
 
-    /* Product shelf — match Rue Broca grid (cool grey field, white tiles) */
+    /* Product shelf — geometric sans product typography (ref: premium grid / Montserrat rhythm) */
     .rb-section-products {
-      background: #e5e9f0;
+      font-family: var(--font-product);
+      background: #e8eaee;
       padding: clamp(44px, 7vw, 68px) var(--pad) clamp(52px, 8vw, 80px);
     }
 
@@ -807,22 +881,28 @@
       text-align: center;
     }
 
+    /* Tall condensed sans — Oswald matches ref (light caps block); reads “longer” than Montserrat */
     .rb-section-products h2 {
-      font-size: clamp(20px, 2.4vw, 26px);
-      font-weight: 700;
-      letter-spacing: 0.1em;
+      font-family: var(--font-product-head);
+      font-size: clamp(22px, 3.2vw, 36px);
+      font-weight: 300;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
+      line-height: 1.12;
       color: #000;
-      margin-bottom: 10px;
+      margin: 0 0 clamp(12px, 2vw, 18px);
     }
 
     .rb-section-products .sub {
-      font-size: 14px;
-      font-weight: 400;
-      color: #5a5a5a;
-      max-width: 560px;
-      margin: 0 auto 36px;
-      line-height: 1.55;
+      font-family: var(--font-product-head);
+      font-size: clamp(12px, 1.35vw, 15px);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      text-transform: none;
+      color: #4a4a4a;
+      max-width: 42rem;
+      margin: 0 auto clamp(28px, 4vw, 40px);
+      line-height: 1.65;
     }
 
     .product-grid {
@@ -833,11 +913,12 @@
     }
 
     .product-card {
+      font-family: var(--font-product);
       display: flex;
       flex-direction: column;
       align-items: stretch;
       background: #fff;
-      padding-bottom: 22px;
+      padding-bottom: clamp(18px, 2.5vw, 24px);
       transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
       will-change: transform;
     }
@@ -875,14 +956,15 @@
 
     /* Fig 6: black badge, bottom-left of image area */
     .badge-sale {
+      font-family: var(--font-product);
       position: absolute;
       bottom: 14px;
       left: 14px;
       top: auto;
       font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: none;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       color: #fff;
       background: #000;
       padding: 7px 11px;
@@ -891,40 +973,71 @@
     }
 
     .product-card h3 {
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      line-height: 1.35;
+      font-family: var(--font-product);
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      line-height: 1.45;
       color: #000;
-      margin-bottom: 12px;
-      padding: 0 10px;
+      margin: 0 auto 10px;
+      padding: 0 clamp(8px, 2vw, 14px) 8px;
       min-height: 2.6em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .product-card h3::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 2px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.85;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1);
+      pointer-events: none;
+    }
+
+    .product-card:hover h3::after,
+    .product-card:focus-within h3::after {
+      transform: scaleX(1);
     }
 
     .rb-price {
       display: flex;
-      flex-direction: row;
-      align-items: baseline;
-      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       width: 100%;
-      max-width: 232px;
       margin: 0 auto;
-      padding: 0 12px;
-      font-size: 13px;
-      gap: 12px;
+      padding: 0 clamp(8px, 2vw, 14px);
+      gap: 6px;
+      font-family: var(--font-product);
     }
 
-    .rb-price__was {
-      color: #757575;
-      font-weight: 400;
-      font-size: 13px;
-      text-decoration: line-through;
-    }
-
+    /* Primary line — light weight; hierarchy from size only */
     .rb-price__now {
       color: #000;
-      font-weight: 700;
-      font-size: 14px;
+      font-weight: 300;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+    }
+
+    /* Secondary: struck RRP */
+    .rb-price__was {
+      color: #8a8a8a;
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-decoration: line-through;
+      line-height: 1.2;
     }
 
     .view-all-wrap {
@@ -933,9 +1046,10 @@
     }
 
     .view-all {
+      font-family: var(--font-product);
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
+      font-weight: 300;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       border-bottom: 2px solid #000;
       padding-bottom: 4px;
@@ -1181,6 +1295,15 @@
       .product-card:focus-within .product-card__visual img {
         transform: none;
       }
+
+      .product-card h3::after {
+        transition: none;
+      }
+
+      .product-card:hover h3::after,
+      .product-card:focus-within h3::after {
+        transform: scaleX(1);
+      }
     }
   </style>
 </head>
@@ -1286,20 +1409,20 @@
 
     <section class="immersive-scroll" id="immersive-story" lang="zh-CN" aria-labelledby="immersive-scroll-heading" data-immersive-scroll>
       <div class="immersive-scroll__field" aria-hidden="true">
-        <div class="immersive-scroll__warm"></div>
-        <div class="immersive-scroll__cool"></div>
-        <div class="immersive-scroll__mist"></div>
+        <div class="immersive-scroll__paper"></div>
+        <div class="immersive-scroll__frost"></div>
         <div class="immersive-scroll__grain"></div>
       </div>
       <div class="immersive-scroll__inner">
         <h2 id="immersive-scroll-heading" class="visually-hidden">香境行旅</h2>
         <div class="immersive-scroll__preface">
-          <p class="immersive-scroll__preface-line">心系天下，与宇宙同频。</p>
-          <p class="immersive-scroll__preface-line">福山，您的内在朝圣之路</p>
+          <p class="immersive-scroll__preface-line">烟火起处，即是修行；方寸之间，天地人归位。</p>
+          <p class="immersive-scroll__preface-line immersive-scroll__preface-line--secondary">心系天下，与宇宙同频。</p>
+          <p class="immersive-scroll__preface-line immersive-scroll__preface-line--lead">福山，您的内在朝圣之路</p>
         </div>
 
         <div class="immersive-scroll__row">
-          <article class="immersive-step immersive-step--from-left" data-immersive-step data-step="1">
+          <article class="immersive-step" data-immersive-step data-step="1">
             <div class="immersive-step__bundle">
               <figure class="immersive-step__panel">
                 <img src="images/immersive-panel-1.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
@@ -1311,7 +1434,7 @@
             </div>
           </article>
 
-          <article class="immersive-step immersive-step--from-right" data-immersive-step data-step="2">
+          <article class="immersive-step" data-immersive-step data-step="2">
             <div class="immersive-step__bundle">
               <figure class="immersive-step__panel">
                 <img src="images/immersive-panel-2.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
@@ -1323,7 +1446,7 @@
             </div>
           </article>
 
-          <article class="immersive-step immersive-step--from-left" data-immersive-step data-step="3">
+          <article class="immersive-step" data-immersive-step data-step="3">
             <div class="immersive-step__bundle">
               <figure class="immersive-step__panel">
                 <img src="images/immersive-panel-3.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
@@ -1335,7 +1458,7 @@
             </div>
           </article>
 
-          <article class="immersive-step immersive-step--from-right" data-immersive-step data-step="4">
+          <article class="immersive-step" data-immersive-step data-step="4">
             <div class="immersive-step__bundle">
               <figure class="immersive-step__panel">
                 <img src="images/immersive-panel-4.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
@@ -1347,7 +1470,7 @@
             </div>
           </article>
 
-          <article class="immersive-step immersive-step--from-left" data-immersive-step data-step="5">
+          <article class="immersive-step" data-immersive-step data-step="5">
             <div class="immersive-step__bundle">
               <figure class="immersive-step__panel">
                 <img src="images/immersive-panel-5.png" alt="" width="900" height="1600" loading="lazy" decoding="async" />
@@ -1365,6 +1488,7 @@
     <section class="rb-section-products" id="shop">
       <div class="rb-section-products__inner">
         <h2>Best sellers</h2>
+        <p class="sub">Find your inner peace with our exclusive incense collection.</p>
 
         <div class="product-grid">
           <article class="product-card">
@@ -1374,8 +1498,8 @@
             </div>
             <h3>HOOKED AZURE</h3>
             <div class="rb-price">
-              <span class="rb-price__was">$34.99 USD</span>
               <span class="rb-price__now">$28.00 USD</span>
+              <span class="rb-price__was">$34.99 USD</span>
             </div>
           </article>
 
@@ -1386,8 +1510,8 @@
             </div>
             <h3>EXOTIC - Heritage</h3>
             <div class="rb-price">
-              <span class="rb-price__was">$39.99 USD</span>
               <span class="rb-price__now">$32.00 USD</span>
+              <span class="rb-price__was">$39.99 USD</span>
             </div>
           </article>
 
@@ -1398,8 +1522,8 @@
             </div>
             <h3>EXOTIC Paradise</h3>
             <div class="rb-price">
-              <span class="rb-price__was">$41.99 USD</span>
               <span class="rb-price__now">$34.00 USD</span>
+              <span class="rb-price__was">$41.99 USD</span>
             </div>
           </article>
 
@@ -1410,8 +1534,8 @@
             </div>
             <h3>HOOKED POUR HOMME</h3>
             <div class="rb-price">
-              <span class="rb-price__was">$36.99 USD</span>
               <span class="rb-price__now">$29.00 USD</span>
+              <span class="rb-price__was">$36.99 USD</span>
             </div>
           </article>
         </div>
@@ -1612,7 +1736,6 @@
       const root = document.querySelector("[data-immersive-scroll]");
       if (!root) return;
 
-      const steps = root.querySelectorAll("[data-immersive-step]");
       var mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
       function updateImmersiveField() {
@@ -1626,65 +1749,48 @@
         root.style.setProperty("--iz-scroll", String(p));
       }
 
-      function updateImmersiveStepReveal() {
-        if (mqReduce.matches) {
-          steps.forEach(function (el) {
-            el.style.setProperty("--immersive-reveal", "1");
-          });
-          return;
-        }
-        const rect = root.getBoundingClientRect();
-        const vh = window.innerHeight;
-        var total = vh + rect.height;
-        if (total <= 0) total = 1;
-        var p = (vh - rect.top) / total;
-        if (p < 0) p = 0;
-        if (p > 1) p = 1;
-        var n = steps.length;
-        var slot = p * n;
-        steps.forEach(function (step, i) {
-          var u = slot - i;
-          if (u < 0) u = 0;
-          else if (u > 1) u = 1;
-          step.style.setProperty("--immersive-reveal", u.toFixed(4));
-        });
-      }
-
       var ticking = false;
       function onScrollOrResize() {
         if (ticking) return;
         ticking = true;
         requestAnimationFrame(function () {
           updateImmersiveField();
-          updateImmersiveStepReveal();
           ticking = false;
         });
       }
 
-      /* Less vertical travel per wheel tick when pointer is over this section — keeps reveal pace readable */
-      root.addEventListener(
-        "wheel",
-        function (e) {
-          if (mqReduce.matches) return;
-          if (!root.contains(e.target)) return;
-          if (e.ctrlKey) return;
-          e.preventDefault();
-          var vh = window.innerHeight;
-          var factor = 0.38;
-          if (e.deltaMode === 1) factor *= 16;
-          else if (e.deltaMode === 2) factor *= vh;
-          window.scrollBy(0, e.deltaY * factor);
-        },
-        { passive: false }
-      );
-
       window.addEventListener("scroll", onScrollOrResize, { passive: true });
       window.addEventListener("resize", onScrollOrResize);
       if (typeof mqReduce.addEventListener === "function") {
-        mqReduce.addEventListener("change", onScrollOrResize);
+        mqReduce.addEventListener("change", function () {
+          if (mqReduce.matches) root.classList.add("is-in-view");
+          onScrollOrResize();
+        });
       } else {
-        mqReduce.addListener(onScrollOrResize);
+        mqReduce.addListener(function () {
+          if (mqReduce.matches) root.classList.add("is-in-view");
+          onScrollOrResize();
+        });
       }
+
+      if (mqReduce.matches) {
+        root.classList.add("is-in-view");
+      } else {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                root.classList.add("is-in-view");
+              } else {
+                root.classList.remove("is-in-view");
+              }
+            });
+          },
+          { threshold: 0.16, rootMargin: "0px 0px -6% 0px" }
+        );
+        io.observe(root);
+      }
+
       onScrollOrResize();
     })();
   </script>
