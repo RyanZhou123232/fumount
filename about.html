@@ -2107,6 +2107,14 @@
         });
       }
 
+      function setFlipDotAriaLabels(nodeList, labels) {
+        nodeList.forEach(function (dot, idx) {
+          if (labels[idx] == null) return;
+          dot.textContent = "";
+          dot.setAttribute("aria-label", labels[idx]);
+        });
+      }
+
       function applyLanguage(lang) {
         var d = dict[lang] || dict.en;
         toggle.setAttribute("data-lang", lang);
@@ -2199,8 +2207,8 @@
         var rightDotsWrap = document.querySelector(".flip-module__dots[aria-label='Right gallery slides'], .flip-module__dots[aria-label='右侧画廊轮播']");
         if (leftDotsWrap) leftDotsWrap.setAttribute("aria-label", d.leftGalleryAria);
         if (rightDotsWrap) rightDotsWrap.setAttribute("aria-label", d.rightGalleryAria);
-        setEach(leftDots, d.leftDotLabels);
-        setEach(rightDots, d.rightDotLabels);
+        setFlipDotAriaLabels(leftDots, d.leftDotLabels);
+        setFlipDotAriaLabels(rightDots, d.rightDotLabels);
 
         try {
           localStorage.setItem(STORAGE_KEY, lang);
