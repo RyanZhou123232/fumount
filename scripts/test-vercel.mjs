@@ -37,7 +37,14 @@ try {
   const head = await realFetch(base + '/', {method: 'HEAD'});
   assert.equal(head.status, 200);
   assert.equal(await head.text(), '');
-  for (const path of ['/cart', '/account/login', '/search?q=test', '/products/unconfigured']) {
+  // React Router navigations load data endpoints instead of HTML documents.
+  for (const path of ['/_root.data', '/collections/all.data', '/collections/ritual.data', '/collections/treasury.data', '/designs/ritual-ivory.data']) {
+    const response = await realFetch(base + path);
+    assert.equal(response.status, 200, path);
+    assert.match(response.headers.get('Content-Type'), /text\/x-script/);
+    assert.doesNotMatch(await response.text(), /Shop features will be available/);
+  }
+  for (const path of ['/cart', '/cart.data', '/account/login', '/search?q=test', '/products/unconfigured']) {
     const response = await realFetch(base + path);
     assert.equal(response.status, 503, path);
   }
