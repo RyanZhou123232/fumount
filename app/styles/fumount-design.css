@@ -1,14 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fúmount — About</title>
-  <link rel="icon" href="images/logo.png" type="image/png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..72,400;6..72,600&family=Cormorant+SC:wght@400;500;600&family=Inter:wght@400;500;600;700&family=Montserrat:wght@100;200;300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&family=Oswald:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
-  <style>
     *,
     *::before,
     *::after {
@@ -51,6 +40,10 @@
       color: var(--rb-black);
       background: var(--rb-bg);
       line-height: 1.5;
+    }
+
+    body > main {
+      margin: 0;
     }
 
     img {
@@ -277,6 +270,16 @@
       min-height: var(--header-nav-h);
     }
 
+    .nav-collections::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: max(100%, 220px);
+      height: 12px;
+      pointer-events: auto;
+    }
+
     .nav-collections__trigger {
       display: inline-flex;
       align-items: center;
@@ -285,7 +288,7 @@
 
     .nav-collections__menu {
       position: absolute;
-      top: calc(100% + 10px);
+      top: calc(100% + 4px);
       left: auto;
       right: 0;
       min-width: 220px;
@@ -301,12 +304,11 @@
       opacity: 0;
       visibility: hidden;
       transform: translateY(-4px);
-      transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+      transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s ease;
       z-index: 1260;
     }
 
-    .nav-collections:hover .nav-collections__menu,
-    .nav-collections:focus-within .nav-collections__menu {
+    .nav-collections.is-open .nav-collections__menu {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
@@ -553,7 +555,7 @@
 
     /* Cormorant SC pairs with Bodoni logo (same high-contrast serif lineage); Noto Serif SC fallback */
     .split-flip-intro {
-      max-width: min(52rem, 94vw);
+      max-width: min(68rem, 96vw);
       margin: 0 auto clamp(14px, 3vw, 26px);
       padding: 0;
       text-align: center;
@@ -562,9 +564,10 @@
 
     .split-flip-intro__title {
       font-family: "Cormorant SC", var(--font-logo), "Noto Serif SC", serif;
-      font-size: clamp(20px, 3vw, 28px);
+      font-size: clamp(15px, 2.05vw, 23px);
       font-weight: 600;
-      letter-spacing: 0.28em;
+      letter-spacing: clamp(0.16em, 0.9vw, 0.28em);
+      white-space: nowrap;
       color: rgba(255, 255, 255, 0.96);
       margin-bottom: clamp(10px, 2vw, 16px);
       font-feature-settings: "kern" 1;
@@ -763,7 +766,7 @@
       inset: 0;
       opacity: 0.1;
       mix-blend-mode: multiply;
-      background-image: url("images/immersive-section-bg.png");
+      background-image: url("/fumount-design/images/immersive-section-bg.png");
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -1373,8 +1376,7 @@
 
     .footer-copy a {
       color: rgba(255, 255, 255, 0.62);
-      text-decoration: underline;
-      text-underline-offset: 3px;
+      text-decoration: none;
     }
 
     .footer-copy a:hover {
@@ -1478,13 +1480,6 @@
         transform: scaleX(1);
       }
     }
-
-    /* About subpage — same chrome as home; dark canvas + inset hero image (full photo, not cropped) */
-    body.page-about {
-      background: #121212;
-      color: #fff;
-    }
-
     .about-page-main {
       padding-top: calc(var(--announce-h) + var(--header-main-h));
       background: #121212;
@@ -1510,11 +1505,11 @@
     .about-copy {
       background: #141414;
       color: #fff;
-      padding: clamp(48px, 8vw, 100px) var(--pad) clamp(56px, 10vw, 120px);
+      padding: clamp(72px, 8.5vw, 96px) var(--pad) clamp(86px, 10vw, 126px);
     }
 
     .about-copy__inner {
-      max-width: min(52rem, 94vw);
+      max-width: min(56rem, 92vw);
       margin: 0 auto;
       text-align: center;
       font-family: "Cormorant SC", "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif;
@@ -1522,29 +1517,33 @@
 
     .about-copy__title {
       font-family: "Cormorant SC", var(--font-logo), "Noto Serif SC", serif;
-      font-size: clamp(20px, 3vw, 28px);
+      font-size: clamp(18px, 2.1vw, 24px);
       font-weight: 600;
-      letter-spacing: 0.28em;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
       color: rgba(255, 255, 255, 0.96);
-      margin: 0 0 clamp(22px, 3.5vw, 40px);
+      margin: 0 0 clamp(42px, 4.6vw, 56px);
       font-feature-settings: "kern" 1;
     }
 
     .about-copy__body {
-      font-size: clamp(14px, 1.35vw, 18px);
-      line-height: 2;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.78);
-      letter-spacing: 0.04em;
+      font-size: clamp(11px, 1vw, 14px);
+      line-height: 2.25;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.76);
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      font-feature-settings: "kern" 1, "liga" 1;
     }
 
     html[lang="en"] .about-copy__body {
-      letter-spacing: 0.02em;
+      letter-spacing: 0.085em;
       font-family: "Cormorant SC", Georgia, "Times New Roman", serif;
     }
 
     .about-copy__para {
-      margin: 0 0 1.15em;
+      margin: 0 auto clamp(22px, 2.8vw, 34px);
+      max-width: 88ch;
     }
 
     .about-copy__para:last-child {
@@ -1554,7 +1553,7 @@
     .about-contact {
       scroll-margin-top: calc(var(--announce-h) + var(--header-main-h) + 16px);
       background: #121212;
-      padding: clamp(40px, 7vw, 72px) var(--pad) clamp(48px, 8vw, 88px);
+      padding: clamp(70px, 8.5vw, 92px) var(--pad) clamp(54px, 7vw, 70px);
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -1567,20 +1566,21 @@
 
     .about-contact__title {
       font-family: "Cormorant SC", var(--font-logo), "Noto Serif SC", serif;
-      font-size: clamp(18px, 2.4vw, 24px);
+      font-size: clamp(17px, 2vw, 22px);
       font-weight: 600;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.34em;
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.94);
-      margin: 0 0 clamp(14px, 2vw, 22px);
+      margin: 0 0 clamp(26px, 3vw, 34px);
     }
 
     .about-contact__placeholder {
-      font-size: clamp(13px, 1.25vw, 16px);
-      line-height: 1.85;
-      font-weight: 400;
+      font-size: clamp(10px, 0.95vw, 12px);
+      line-height: 1.9;
+      font-weight: 500;
       color: rgba(255, 255, 255, 0.52);
-      letter-spacing: 0.06em;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
       margin: 0;
     }
 
@@ -1588,678 +1588,176 @@
       letter-spacing: 0.03em;
       font-family: "Cormorant SC", Georgia, "Times New Roman", serif;
     }
-  </style>
-</head>
-<body class="page-about">
-  <p class="announcement">Welcome to Fúmount — visual demo, not a live store</p>
 
-  <header class="site-header" id="siteHeader">
-    <div class="header-stack">
-      <nav class="nav-row" aria-label="Primary">
-        <div class="nav-row__cluster">
-          <div class="nav-collections">
-            <a href="index.html#collections" class="nav-collections__trigger nav-row__collections-link">Collections <span class="nav-row__chev" aria-hidden="true">⌵</span></a>
-            <ul class="nav-collections__menu" aria-label="Collections list">
-              <li><button type="button" class="nav-collections__item">Series 1</button></li>
-              <li><button type="button" class="nav-collections__item">Series 2</button></li>
-              <li><button type="button" class="nav-collections__item">Series 3</button></li>
-              <li><button type="button" class="nav-collections__item">Series 4</button></li>
-            </ul>
-          </div>
-          <div class="nav-row__strip">
-            <a href="index.html#shop">Gift sets</a>
-            <a href="index.html#shop">For him</a>
-            <a href="index.html#shop">For her</a>
-            <a href="index.html#shop">Best sellers</a>
-            <a href="index.html">Blog</a>
-            <a href="about.html" aria-current="page">Who we are</a>
-            <a href="#contact-us">Contact</a>
-          </div>
-        </div>
-      </nav>
+/* Hydrogen integration adjustments */
+.header-brand-left .header-search-btn {
+  display: inline-flex;
+}
 
-      <div class="header-brand-row">
-        <div class="header-brand-left">
-          <button type="button" class="header-search-btn icon-btn" aria-label="Search">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.35-4.35" /></svg>
-          </button>
-          <span class="header-search-underline" aria-hidden="true"></span>
-        </div>
+.cart-count {
+  font-size: 10px;
+  line-height: 1;
+  margin-left: 3px;
+}
 
-        <a href="index.html" class="logo" aria-label="Fúmount home">
-          <img class="logo__mark" src="images/logo.png" alt="" width="240" height="240" decoding="async" />
-          <span class="logo__word">Fúmount</span>
-        </a>
+.product-card__note {
+  color: #6f6f6f;
+  font-family: var(--font-product);
+  font-size: 11px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  line-height: 1.45;
+  margin: -2px auto 12px;
+  min-height: 2.8em;
+  max-width: 25ch;
+  text-align: center;
+  text-transform: uppercase;
+}
 
-        <div class="header-tools">
-          <button type="button" class="icon-btn" aria-label="Account">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5" /><path d="M6 20v-1a6 6 0 0112 0v1" /></svg>
-          </button>
-          <span class="header-tools__divider" aria-hidden="true"></span>
-          <div class="language-switch" id="languageSwitch">
-            <button type="button" class="region-pill" id="languageToggle" aria-label="Switch language" aria-haspopup="listbox" aria-expanded="false">US <span class="chev" aria-hidden="true">▼</span></button>
-            <div class="language-switch__menu" id="languageMenu" role="listbox" aria-label="Available languages"></div>
-          </div>
-          <span class="header-tools__divider" aria-hidden="true"></span>
-          <a href="#" class="icon-btn" aria-label="Shopping bag">
-            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 8h15l-1.5 13H7.5L6 8z" /><path d="M9 8V6a3 3 0 016 0v2" /></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </header>
+.rb-price .product-price {
+  color: #000;
+  font-family: var(--font-product);
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
 
-  <main class="about-page-main">
-    <div class="about-hero-wrap">
-      <figure class="about-hero-figure">
-        <img src="images/hi.png" alt="" width="1200" height="2400" decoding="async" />
-      </figure>
-    </div>
+.rb-price .product-price > div,
+.rb-price .product-price span {
+  display: inline-flex;
+  justify-content: center;
+}
 
-    <section class="about-copy" id="about-copy" aria-labelledby="about-heading">
-      <div class="about-copy__inner">
-        <h1 id="about-heading" class="about-copy__title">Who we are</h1>
-        <div class="about-copy__body">
-          <p class="about-copy__para">
-            Fúmount uses incense—a tangible medium—to shape an intimate, invisible field for you in every breath.
-          </p>
-          <p class="about-copy__para">
-            This is not about taking from the world; it is a pilgrimage that turns inward.
-          </p>
-          <p class="about-copy__para">
-            Along the way, fragrance clears distraction and steadies the mind, until you can hear your true inner voice and glimpse the wisdom already within you.
-          </p>
-          <p class="about-copy__para">
-            Each lighting is a deep conversation with yourself; each thread of scent is a lamp on the path of growth.
-          </p>
-          <p class="about-copy__para">
-            Fúmount offers no instant answers—only companionship and space—so that amid life’s noise you may walk an inward path and grow in what is real.
-          </p>
-          <p class="about-copy__para">
-            The span of one stick of incense: a quiet ground, and a meeting with who you truly are.
-          </p>
-          <p class="about-copy__para">
-            Fúmount witnesses every inward leap you make. Practice is not on a distant mountain—it lives in each present moment. Fúmount Classics are everyday rituals within reach, helping you settle body‑and‑mind quickly and recover your own rhythm in a crowded world.
-          </p>
-        </div>
-      </div>
-    </section>
+.page,
+.collection,
+.product,
+.cart,
+.search,
+.account {
+  padding-top: calc(var(--announce-h) + var(--header-nav-h) + var(--header-brand-compact) + 48px);
+}
 
-    <section class="about-contact" id="contact-us" aria-labelledby="contact-us-heading">
-      <div class="about-contact__inner">
-        <h2 id="contact-us-heading" class="about-contact__title">Contact us</h2>
-        <p class="about-contact__placeholder">
-          Placeholder — email, phone, studio hours, and a contact form will appear here.
-        </p>
-      </div>
-    </section>
-  </main>
+.split-flip-intro__title,
+.split-flip-intro__line,
+.immersive-scroll__preface-line,
+.immersive-step__en,
+.immersive-step__zh {
+  text-transform: uppercase;
+}
 
-  <footer class="site-footer-rb">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <a href="index.html" class="footer-logo">
-          <span class="footer-logo__word">Fúmount</span>
-        </a>
-        <div class="footer-rule"></div>
-        <div class="footer-social">
-          <a href="#" aria-label="Facebook">f</a>
-          <a href="#" aria-label="Instagram">in</a>
-          <a href="#" aria-label="YouTube">▶</a>
-          <a href="#" aria-label="TikTok">♪</a>
-        </div>
-        <a href="#" class="footer-follow-shop">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 21s-6.715-4.35-9.192-8.4C.75 9.15 2.85 5.25 7.05 5.25c2.025 0 3.825 1.05 4.95 2.7 1.125-1.65 2.925-2.7 4.95-2.7 4.2 0 6.3 3.9 4.242 7.35C18.715 16.65 12 21 12 21z" /></svg>
-          Follow on shop
-        </a>
-      </div>
+/* Typography normalization: keep the migrated Hydrogen UI close to the static reference. */
+.announcement,
+.nav-row,
+.header-tools,
+.language-switch,
+.footer-col h3,
+.pay-badge,
+.footer-copy {
+  font-family: var(--font);
+}
 
-      <div class="footer-col">
-        <h3>Policies</h3>
-        <ul>
-          <li><a href="#">Terms of Service</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Shipping Policy</a></li>
-          <li><a href="#">Refund Policy</a></li>
-        </ul>
-      </div>
+.logo__word,
+.footer-logo__word {
+  font-family: var(--font-logo);
+  font-weight: 400;
+}
 
-      <div class="footer-col">
-        <h3>Find out more</h3>
-        <ul>
-          <li><a href="about.html">About us</a></li>
-          <li><a href="#contact-us">Contact us</a></li>
-          <li><a href="#">Stockists</a></li>
-          <li><a href="#">Press</a></li>
-        </ul>
-      </div>
-    </div>
+.hero-slide__kicker,
+.hero-slide__title,
+.btn-shop,
+.product-card h3,
+.product-card__note,
+.rb-price,
+.view-all {
+  font-family: var(--font-product);
+}
 
-    <div class="footer-pay" aria-hidden="true">
-      <span class="pay-badge">Amex</span>
-      <span class="pay-badge">Apple Pay</span>
-      <span class="pay-badge">Discover</span>
-      <span class="pay-badge">G Pay</span>
-      <span class="pay-badge">Mastercard</span>
-      <span class="pay-badge">Shop Pay</span>
-      <span class="pay-badge">Visa</span>
-    </div>
+.split-flip-intro,
+.split-flip-intro__title,
+.split-flip-intro__line,
+.immersive-scroll__preface,
+.immersive-scroll__preface-line,
+.immersive-step__text,
+.immersive-step__en,
+.immersive-step__zh,
+.about-copy__inner,
+.about-copy__title,
+.about-copy__body,
+.about-contact__inner,
+.about-contact__title,
+.about-contact__placeholder {
+  font-family: "Cormorant SC", "Noto Serif SC", "Songti SC", Georgia, serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
 
-    <p class="footer-copy">© 2026, Fúmount · All rights reserved · Demo store · Inspired by <a href="https://us.ruebrocaparfums.com/">Rue Broca</a> (not affiliated)</p>
-  </footer>
+.split-flip-intro__line {
+  font-size: clamp(10px, 1.08vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  line-height: 1.9;
+}
 
-  <script>
-    (function () {
-      const header = document.getElementById("siteHeader");
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      let targetP = 0;
-      let currentP = 0;
-      let rafId = null;
-      /* Lower = slower follow & more lag after scroll (ease-out catch-up) */
-      const hdrSmooth = 0.072;
+.immersive-step__en {
+  font-size: clamp(9px, 0.95vw, 10px);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+}
 
-      function heroBlendDistance() {
-        return Math.max(window.innerHeight * 0.42, 280);
-      }
+.immersive-step__zh {
+  font-size: clamp(10px, 1.05vw, 11px);
+  font-weight: 500;
+  letter-spacing: 0.17em;
+}
 
-      function readTargetProgress() {
-        const y = window.scrollY;
-        const d = heroBlendDistance();
-        return Math.min(Math.max(y / d, 0), 1);
-      }
+html[lang="zh-CN"] .split-flip-intro__line,
+html[lang="zh-CN"] .immersive-scroll__preface-line,
+html[lang="zh-CN"] .immersive-step__en,
+html[lang="zh-CN"] .immersive-step__zh,
+html[lang="zh-CN"] .about-copy__body,
+html[lang="zh-CN"] .about-contact__placeholder {
+  font-family: "Noto Serif SC", "Cormorant SC", "Songti SC", serif;
+  letter-spacing: 0.12em;
+}
 
-      function pushProgress() {
-        header.style.setProperty("--hdr-progress", String(currentP));
-      }
+    /* Two collections, six finishes; warm product photography across both shelves. */
+    .rb-section-products { background: #f4f0e9; }
+    .rb-section-products--bestsellers { background: #e9e3d8; }
+    .product-grid--all { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 34px 24px; }
+    .product-card { background: #faf7f2; }
+    .product-card__visual { aspect-ratio: 1; background: #f4f0e9; margin-bottom: 22px; }
+    .product-card__visual img { width: 100%; height: 100%; filter: none; object-fit: contain; }
+    .product-card__line { font-size: 10px; letter-spacing: 0.17em; text-transform: uppercase; color: #756d61; margin: 0 12px 10px; }
+    .product-card h3 { font-family: var(--font-logo); font-size: clamp(22px, 2.2vw, 30px); letter-spacing: 0.02em; min-height: 0; font-weight: 400; padding-bottom: 0; margin-bottom: 8px; }
+    .product-card__detail { font-size: 11px; line-height: 1.6; color: #756d61; margin: 0 12px; letter-spacing: 0.03em; }
+    #shop, #best-sellers, [id^="product-"] { scroll-margin-top: 180px; }
+    @media (max-width: 900px) { .product-grid--all { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 420px) { .product-grid--all { grid-template-columns: 1fr; } }
 
-      function tick() {
-        rafId = null;
-        if (reduceMotion) {
-          currentP = targetP;
-          pushProgress();
-          return;
-        }
-        var diff = targetP - currentP;
-        if (Math.abs(diff) < 0.0004) {
-          currentP = targetP;
-          pushProgress();
-          return;
-        }
-        currentP += diff * hdrSmooth;
-        pushProgress();
-        rafId = requestAnimationFrame(tick);
-      }
 
-      function schedule() {
-        targetP = readTargetProgress();
-        if (reduceMotion) {
-          currentP = targetP;
-          pushProgress();
-          return;
-        }
-        if (rafId == null) rafId = requestAnimationFrame(tick);
-      }
-
-      function onResize() {
-        targetP = readTargetProgress();
-        if (reduceMotion) {
-          currentP = targetP;
-          pushProgress();
-          return;
-        }
-        if (rafId == null) rafId = requestAnimationFrame(tick);
-      }
-
-      window.addEventListener("scroll", schedule, { passive: true });
-      window.addEventListener("resize", onResize);
-      targetP = readTargetProgress();
-      currentP = reduceMotion ? targetP : 0;
-      pushProgress();
-      if (!reduceMotion && Math.abs(targetP - currentP) > 0.002) {
-        rafId = requestAnimationFrame(tick);
-      }
-    })();
-
-    (function () {
-      const INTERVAL_MS = 4500;
-      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      function mountFlip(root) {
-        const slides = Array.from(root.querySelectorAll(".flip-module__slide"));
-        const dots = Array.from(root.querySelectorAll(".flip-module__dot"));
-        if (!slides.length || !dots.length) return;
-
-        let index = 0;
-        let timer = null;
-
-        function syncAria() {
-          dots.forEach(function (d, di) {
-            d.classList.toggle("is-active", di === index);
-            d.setAttribute("aria-selected", di === index ? "true" : "false");
-          });
-        }
-
-        function go(nextIndex) {
-          slides[index].classList.remove("is-active");
-          index = (nextIndex + slides.length) % slides.length;
-          slides[index].classList.add("is-active");
-          syncAria();
-        }
-
-        function tick() {
-          go(index + 1);
-        }
-
-        function startAutoplay() {
-          if (timer) clearInterval(timer);
-          timer = null;
-          if (reduceMotion) return;
-          timer = setInterval(tick, INTERVAL_MS);
-        }
-
-        dots.forEach(function (dot, idx) {
-          dot.addEventListener("click", function () {
-            if (idx === index) return;
-            go(idx);
-            startAutoplay();
-          });
-        });
-
-        startAutoplay();
-
-        document.addEventListener("visibilitychange", function () {
-          if (document.hidden) {
-            if (timer) clearInterval(timer);
-            timer = null;
-          } else {
-            startAutoplay();
-          }
-        });
-      }
-
-      document.querySelectorAll("[data-flip-module]").forEach(mountFlip);
-    })();
-
-    (function () {
-      const root = document.querySelector("[data-immersive-scroll]");
-      if (!root) return;
-
-      var mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-
-      function updateImmersiveField() {
-        const rect = root.getBoundingClientRect();
-        const vh = window.innerHeight;
-        var range = rect.height + vh;
-        var passed = vh - rect.top;
-        var p = passed / range;
-        if (p < 0) p = 0;
-        if (p > 1) p = 1;
-        root.style.setProperty("--iz-scroll", String(p));
-      }
-
-      var ticking = false;
-      function onScrollOrResize() {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(function () {
-          updateImmersiveField();
-          ticking = false;
-        });
-      }
-
-      window.addEventListener("scroll", onScrollOrResize, { passive: true });
-      window.addEventListener("resize", onScrollOrResize);
-      if (typeof mqReduce.addEventListener === "function") {
-        mqReduce.addEventListener("change", function () {
-          if (mqReduce.matches) root.classList.add("is-in-view");
-          onScrollOrResize();
-        });
-      } else {
-        mqReduce.addListener(function () {
-          if (mqReduce.matches) root.classList.add("is-in-view");
-          onScrollOrResize();
-        });
-      }
-
-      if (mqReduce.matches) {
-        root.classList.add("is-in-view");
-      } else {
-        var io = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (entry) {
-              if (entry.isIntersecting) {
-                root.classList.add("is-in-view");
-              } else {
-                root.classList.remove("is-in-view");
-              }
-            });
-          },
-          { threshold: 0.16, rootMargin: "0px 0px -6% 0px" }
-        );
-        io.observe(root);
-      }
-
-      onScrollOrResize();
-    })();
-
-    (function () {
-      var toggle = document.getElementById("languageToggle");
-      if (!toggle) return;
-      var switchWrap = document.getElementById("languageSwitch");
-      var menu = document.getElementById("languageMenu");
-
-      var STORAGE_KEY = "fumount-lang";
-      var html = document.documentElement;
-
-      var navLinks = document.querySelectorAll(".nav-row__collections-link, .nav-row__strip > a");
-      var collectionItems = document.querySelectorAll(".nav-collections__item");
-      var splitLines = document.querySelectorAll(".split-flip-intro__line");
-      var immersiveEn = document.querySelectorAll(".immersive-step__en");
-      var immersiveZh = document.querySelectorAll(".immersive-step__zh");
-      var productTitles = document.querySelectorAll(".product-card h3");
-      var badgeSale = document.querySelectorAll(".badge-sale");
-      var leftDots = document.querySelectorAll(".flip-module__dots[aria-label='Left gallery slides'] .flip-module__dot");
-      var rightDots = document.querySelectorAll(".flip-module__dots[aria-label='Right gallery slides'] .flip-module__dot");
-      var aboutParas = document.querySelectorAll(".about-copy__para");
-
-      var dict = {
-        en: {
-          languageButton: "US",
-          languageButtonLabel: "Switch to Chinese",
-          pageTitle: "Fúmount — About",
-          aboutHeading: "Who we are",
-          aboutParas: [
-            "Fúmount uses incense—a tangible medium—to shape an intimate, invisible field for you in every breath.",
-            "This is not about taking from the world; it is a pilgrimage that turns inward.",
-            "Along the way, fragrance clears distraction and steadies the mind, until you can hear your true inner voice and glimpse the wisdom already within you.",
-            "Each lighting is a deep conversation with yourself; each thread of scent is a lamp on the path of growth.",
-            "Fúmount offers no instant answers—only companionship and space—so that amid life’s noise you may walk an inward path and grow in what is real.",
-            "The span of one stick of incense: a quiet ground, and a meeting with who you truly are.",
-            "Fúmount witnesses every inward leap you make. Practice is not on a distant mountain—it lives in each present moment. Fúmount Classics are everyday rituals within reach, helping you settle body‑and‑mind quickly and recover your own rhythm in a crowded world."
-          ],
-          contactHeading: "Contact us",
-          contactPlaceholder:
-            "Placeholder — email, phone, studio hours, and a contact form will appear here.",
-          announcement: "Welcome to Fúmount — visual demo, not a live store",
-          navAria: "Primary",
-          nav: ["Collections", "Gift sets", "For him", "For her", "Best sellers", "Blog", "Who we are", "Contact"],
-          collectionListAria: "Collections list",
-          collectionItems: ["Series 1", "Series 2", "Series 3", "Series 4"],
-          searchAria: "Search",
-          accountAria: "Account",
-          bagAria: "Shopping bag",
-          logoAria: "Fúmount home",
-          heroAria: "Featured campaign",
-          heroKicker: "New campaign",
-          heroTitle: "The incense collection",
-          heroCta: "Shop now",
-          splitTitle: "Harmony of Heaven, Earth & Humanity",
-          splitLines: [
-            "With tangible fragrance, an intangible sanctuary is formed; through the inward path of pilgrimage, the unity of Heaven, Earth, and Human is realized.",
-            "A single stick of incense becomes a moving field of practice.",
-            "Guided by scent, a boundary is quietly drawn wherever one stands; through the breath, awareness turns inward on a sacred journey.",
-            "Between each inhale and exhale, one awakens to the \"Human\" in the present, rooted in the depth of \"Earth,\" resonant with the clarity of \"Heaven.\"",
-            "Where smoke rises, there is cultivation; within a small space, Heaven, Earth, and Human return to their rightful harmony."
-          ],
-          leftGalleryAria: "Left gallery slides",
-          rightGalleryAria: "Right gallery slides",
-          leftDotLabels: ["Image 1 of 2", "Image 2 of 2"],
-          rightDotLabels: ["Image 1 of 2", "Image 2 of 2"],
-          immersiveHeading: "Incense Journey",
-          immersivePreface1: "Where incense rises, practice begins; in a small space, heaven, earth and humanity return to place.",
-          immersivePreface2: "Hold the world in your heart, and resonate with the universe.",
-          immersivePreface3: "Fúmount, your inward pilgrimage path",
-          immersiveEn: ["Relax & Unwind", "Stillness", "Depth", "Sanctuary", "Return"],
-          immersiveZh: [
-            "Morning light appears; the first incense awakens.",
-            "One wisp of smoke, and all grows quiet.",
-            "Breathe deeply, and the inner scene opens.",
-            "A small space can become a sanctuary.",
-            "Heaven clears, earth settles, and the self returns to calm."
-          ],
-          productsTitle: "Best sellers",
-          productsSub: "Find your inner peace with our exclusive incense collection.",
-          badgeSale: "PayDay Sale",
-          productNames: ["HOOKED AZURE", "EXOTIC - Heritage", "EXOTIC Paradise", "HOOKED POUR HOMME"],
-          viewAll: "View all",
-          followShop: "Follow on shop",
-          policiesTitle: "Policies",
-          policyItems: ["Terms of Service", "Privacy Policy", "Shipping Policy", "Refund Policy"],
-          moreTitle: "Find out more",
-          moreItems: ["About us", "Contact us", "Stockists", "Press"],
-          footerCopy: "© 2026, Fúmount · All rights reserved · Demo store · Inspired by <a href=\"https://us.ruebrocaparfums.com/\">Rue Broca</a> (not affiliated)"
-        },
-        zh: {
-          languageButton: "中文",
-          languageButtonLabel: "切换为英文",
-          pageTitle: "Fúmount — 关于我们",
-          aboutHeading: "关于我们",
-          aboutParas: [
-            "福山集，以香这一有形之物为媒介，在呼吸吐纳间，为您缔造一个专属的无形场域。",
-            "这并非向外索取，而是一场向内走的朝圣之路。",
-            "在这条路上，香气扫除杂念，安定心神，让您听见内在真实的声音，照见本心的智慧。",
-            "每一次点燃，都是一次与自我的深度对话；每一缕芬芳，都是成长路上的明灯。",
-            "福山集，不提供速成的答案，只提供陪伴与空间，助您在纷扰世界中，走朝圣路，向内求，得真成长。",
-            "一炷香的时间，一方静土，一场与真我的相遇。",
-            "福山集，见证您的每一次内在跃升。修行不在远山，而在每一个当下。福山经典，是您触手可及的日常仪式，帮助您在纷繁世界中，快速安顿身心，找回自己的节奏。"
-          ],
-          contactHeading: "联系我们",
-          contactPlaceholder: "占位说明 — 此处将补充邮箱、电话、开放时间以及留言表单等联系方式。",
-          announcement: "欢迎来到 Fúmount — 视觉演示站点，非真实商店",
-          navAria: "主导航",
-          nav: ["系列", "礼盒", "男士", "女士", "畅销", "博客", "关于我们", "联系我们"],
-          collectionListAria: "系列列表",
-          collectionItems: ["系列 1", "系列 2", "系列 3", "系列 4"],
-          searchAria: "搜索",
-          accountAria: "账户",
-          bagAria: "购物袋",
-          logoAria: "Fúmount 首页",
-          heroAria: "主推活动",
-          heroKicker: "全新系列",
-          heroTitle: "福山集，不只是一炷香、一件物——",
-          heroCta: "立即选购",
-          splitTitle: "天地人香境",
-          splitLines: [
-            "以有形之香，缔造无形道场；借由内朝圣之路，达成天地人合一。",
-            "一炷香，便是一方移动的道场。",
-            "以香为引，随地结界；以息为观，向内朝圣。",
-            "在呼吸之间，觉知「人」在当下，承接「地」之厚重，感应「天」之清远。",
-            "烟火起处，即是修行；方寸之间，天地人归位。"
-          ],
-          leftGalleryAria: "左侧画廊轮播",
-          rightGalleryAria: "右侧画廊轮播",
-          leftDotLabels: ["第 1 张 / 共 2 张", "第 2 张 / 共 2 张"],
-          rightDotLabels: ["第 1 张 / 共 2 张", "第 2 张 / 共 2 张"],
-          immersiveHeading: "香境行旅",
-          immersivePreface1: "烟火起处，即是修行；方寸之间，天地人归位。",
-          immersivePreface2: "心系天下，与宇宙同频。",
-          immersivePreface3: "福山，您的内在朝圣之路",
-          immersiveEn: ["松弛安住", "静定", "深境", "心域", "归返"],
-          immersiveZh: [
-            "晨光初透，香起无声。",
-            "一缕烟，万象寂。",
-            "息愈盛，境自开。",
-            "方寸之地，即是道场。",
-            "天清地宁，人归于静。"
-          ],
-          productsTitle: "畅销精选",
-          productsSub: "以福山香境系列，寻回您内在的平和与专注。",
-          badgeSale: "限时优惠",
-          productNames: ["钩蓝之韵", "异域·传承", "异域·乐园", "钩蓝·男士"],
-          viewAll: "查看全部",
-          followShop: "关注店铺",
-          policiesTitle: "政策说明",
-          policyItems: ["服务条款", "隐私政策", "配送政策", "退款政策"],
-          moreTitle: "了解更多",
-          moreItems: ["关于我们", "联系我们", "门店信息", "媒体资料"],
-          footerCopy: "© 2026, Fúmount · 保留所有权利 · 演示站点 · 灵感来源 <a href=\"https://us.ruebrocaparfums.com/\">Rue Broca</a>（无关联）"
-        }
-      };
-
-      function setText(selector, value) {
-        var el = document.querySelector(selector);
-        if (el) el.textContent = value;
-      }
-
-      function setEach(nodeList, values) {
-        nodeList.forEach(function (el, idx) {
-          if (values[idx] != null) el.textContent = values[idx];
-        });
-      }
-
-      function setFlipDotAriaLabels(nodeList, labels) {
-        nodeList.forEach(function (dot, idx) {
-          if (labels[idx] == null) return;
-          dot.textContent = "";
-          dot.setAttribute("aria-label", labels[idx]);
-        });
-      }
-
-      function applyLanguage(lang) {
-        var d = dict[lang] || dict.en;
-        toggle.setAttribute("data-lang", lang);
-        toggle.setAttribute("aria-label", d.languageButtonLabel);
-        html.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
-
-        document.title = d.pageTitle;
-
-        var labelNode = toggle.childNodes[0];
-        if (labelNode) labelNode.nodeValue = d.languageButton + " ";
-
-        setText(".announcement", d.announcement);
-        setText(".hero-slide__kicker", d.heroKicker);
-        setText(".hero-slide__title", d.heroTitle);
-        setText(".btn-shop", d.heroCta);
-        setText("#split-flip-heading", d.splitTitle);
-        setEach(splitLines, d.splitLines);
-        setText("#immersive-scroll-heading", d.immersiveHeading);
-        setText(".immersive-scroll__preface-line", d.immersivePreface1);
-        setText(".immersive-scroll__preface-line--secondary", d.immersivePreface2);
-        setText(".immersive-scroll__preface-line--lead", d.immersivePreface3);
-        setEach(immersiveEn, d.immersiveEn);
-        setEach(immersiveZh, d.immersiveZh);
-        setText(".rb-section-products h2", d.productsTitle);
-        setText(".rb-section-products .sub", d.productsSub);
-        setEach(badgeSale, [d.badgeSale, d.badgeSale, d.badgeSale, d.badgeSale]);
-        setEach(productTitles, d.productNames);
-        setText(".view-all", d.viewAll);
-        var followShop = document.querySelector(".footer-follow-shop");
-        if (followShop) {
-          var followSvg = followShop.querySelector("svg");
-          if (followSvg) {
-            followShop.innerHTML = followSvg.outerHTML + " " + d.followShop;
-          } else {
-            followShop.textContent = d.followShop;
-          }
-        }
-        setText(".footer-col:nth-of-type(1) h3", d.policiesTitle);
-        setEach(document.querySelectorAll(".footer-col:nth-of-type(1) li a"), d.policyItems);
-        setText(".footer-col:nth-of-type(2) h3", d.moreTitle);
-        setEach(document.querySelectorAll(".footer-col:nth-of-type(2) li a"), d.moreItems);
-        var footerCopy = document.querySelector(".footer-copy");
-        if (footerCopy) footerCopy.innerHTML = d.footerCopy;
-
-        setText("#about-heading", d.aboutHeading);
-        setEach(aboutParas, d.aboutParas);
-        var aboutSection = document.getElementById("about-copy");
-        if (aboutSection) aboutSection.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
-
-        setText("#contact-us-heading", d.contactHeading);
-        setText(".about-contact__placeholder", d.contactPlaceholder);
-        var contactSection = document.getElementById("contact-us");
-        if (contactSection) contactSection.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
-
-        var nav = document.querySelector(".nav-row");
-        if (nav) nav.setAttribute("aria-label", d.navAria);
-        navLinks.forEach(function (link, idx) {
-          if (d.nav[idx] == null) return;
-          if (idx === 0) {
-            link.innerHTML = d.nav[idx] + ' <span class="nav-row__chev" aria-hidden="true">⌵</span>';
-          } else {
-            link.textContent = d.nav[idx];
-          }
-          if (idx === 6 && link.getAttribute("href") === "about.html") {
-            link.setAttribute("aria-current", "page");
-          } else {
-            link.removeAttribute("aria-current");
-          }
-        });
-        setEach(collectionItems, d.collectionItems);
-        var collectionsMenu = document.querySelector(".nav-collections__menu");
-        if (collectionsMenu) collectionsMenu.setAttribute("aria-label", d.collectionListAria);
-
-        var hero = document.querySelector(".hero-slide");
-        if (hero) hero.setAttribute("aria-label", d.heroAria);
-        var split = document.querySelector(".split-flip-section");
-        if (split) split.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
-        var immersive = document.querySelector(".immersive-scroll");
-        if (immersive) immersive.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
-        var logo = document.querySelector(".logo");
-        if (logo) logo.setAttribute("aria-label", d.logoAria);
-        var search = document.querySelector(".header-search-btn");
-        if (search) search.setAttribute("aria-label", d.searchAria);
-        var account = document.querySelector(".header-tools .icon-btn[aria-label]");
-        if (account) account.setAttribute("aria-label", d.accountAria);
-        var bag = document.querySelector(".header-tools a.icon-btn");
-        if (bag) bag.setAttribute("aria-label", d.bagAria);
-
-        var leftDotsWrap = document.querySelector(".flip-module__dots[aria-label='Left gallery slides'], .flip-module__dots[aria-label='左侧画廊轮播']");
-        var rightDotsWrap = document.querySelector(".flip-module__dots[aria-label='Right gallery slides'], .flip-module__dots[aria-label='右侧画廊轮播']");
-        if (leftDotsWrap) leftDotsWrap.setAttribute("aria-label", d.leftGalleryAria);
-        if (rightDotsWrap) rightDotsWrap.setAttribute("aria-label", d.rightGalleryAria);
-        setFlipDotAriaLabels(leftDots, d.leftDotLabels);
-        setFlipDotAriaLabels(rightDots, d.rightDotLabels);
-
-        try {
-          localStorage.setItem(STORAGE_KEY, lang);
-        } catch (e) {}
-
-        renderLanguageMenu(lang);
-      }
-
-      function renderLanguageMenu(currentLang) {
-        if (!menu) return;
-        var targetLang = currentLang === "en" ? "zh" : "en";
-        var optionLabel = targetLang === "en" ? "English" : "中文";
-        menu.innerHTML =
-          '<button type="button" class="language-switch__option" data-lang="' +
-          targetLang +
-          '" role="option">' +
-          optionLabel +
-          "</button>";
-      }
-
-      toggle.addEventListener("click", function () {
-        if (!switchWrap) return;
-        var nextOpen = !switchWrap.classList.contains("is-open");
-        switchWrap.classList.toggle("is-open", nextOpen);
-        toggle.setAttribute("aria-expanded", nextOpen ? "true" : "false");
-      });
-
-      if (menu) {
-        menu.addEventListener("click", function (event) {
-          var option = event.target.closest(".language-switch__option");
-          if (!option) return;
-          applyLanguage(option.getAttribute("data-lang"));
-          if (switchWrap) switchWrap.classList.remove("is-open");
-          toggle.setAttribute("aria-expanded", "false");
-        });
-      }
-
-      document.addEventListener("click", function (event) {
-        if (!switchWrap) return;
-        if (switchWrap.contains(event.target)) return;
-        switchWrap.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-      });
-
-      var initial = "en";
-      try {
-        var cached = localStorage.getItem(STORAGE_KEY);
-        if (cached === "en" || cached === "zh") initial = cached;
-      } catch (e) {}
-      applyLanguage(initial);
-    })();
-  </script>
-</body>
-</html>
+/* Approved homepage imagery and accessible collection disclosure. */
+.flip-module__viewport { transform: scale(.82); transform-origin: center; }
+.immersive-step__panel { width: 100%; min-height: 0; aspect-ratio: 1; border-radius: 0; box-shadow: none; background: #d6cbbb; }
+.immersive-step__panel img { width: 100%; height: 100%; max-height: none; object-fit: cover; }
+.immersive-step__bundle { justify-content: flex-start; gap: clamp(16px, 2vw, 24px); }
+.immersive-step__en { font-family: var(--font); color: rgba(72,64,52,.85); letter-spacing: .18em; }
+html[lang="en"] .immersive-step__zh { min-height: 1.65em; }
+.nav-collections__trigger { color: inherit; font: inherit; letter-spacing: inherit; text-transform: inherit; padding: 8px 0; cursor: pointer; }
+.nav-collections__menu::before { content: ""; position: absolute; top: -14px; left: 0; right: 0; height: 14px; }
+.product-card__visual { display: block; }
+.product-card h3 a { color: inherit; }
+.product-card .rb-price { margin-top: 14px; font-size: 14px; }
+.catalogue-page { padding-top: calc(var(--announce-h) + var(--header-nav-h) + var(--header-brand-compact)); background: #f4f0e9; min-height: 70vh; }
+.catalogue-back { display: inline-block; font-size: 11px; letter-spacing: .08em; margin: 0 0 28px; border-bottom: 1px solid #958a78; padding-bottom: 5px; }
+.catalogue-heading { font-family: var(--font-product-head); font-size: clamp(22px, 3.2vw, 36px); font-weight: 300; letter-spacing: .22em; text-transform: uppercase; line-height: 1.12; margin: 0 0 18px; }
+.design-detail { padding: calc(var(--announce-h) + var(--header-nav-h) + var(--header-brand-compact) + 50px) var(--pad) 70px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 5vw; max-width: 1400px; margin: 0 auto; }
+.design-detail h1 { font-family: var(--font-logo); font-size: clamp(32px, 5vw, 54px); font-weight: 400; }
+.design-detail p { margin: 20px 0; }
+.design-preview-notice { position: fixed; bottom: 12px; left: 12px; z-index: 1400; padding: 6px 10px; font-size: 10px; letter-spacing: .04em; background: #25221f; color: #fff; border-radius: 3px; }
+@media (max-width: 720px) {
+  .immersive-scroll__row { align-items: flex-start; gap: 18px; scroll-snap-type: x mandatory; }
+  .immersive-step { flex: 0 0 min(64vw, 260px); max-width: min(64vw, 260px); scroll-snap-align: start; }
+  .immersive-step__panel { min-height: 0; }
+  .immersive-step__panel img { max-height: none; }
+  .design-detail { grid-template-columns: 1fr; }
+}
