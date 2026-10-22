@@ -2,6 +2,19 @@
 
 ## Frontend design update
 
+### Vercel deployment
+
+`vercel.json` runs `npm run build:vercel`, packaging the existing Hydrogen fetch
+entrypoint as a Node function and publishing `dist/client` assets through the
+Vercel Build Output API. The old static `build` output directory is not used.
+Oxygen builds continue to use `npm run build` without modification.
+
+The Vercel configuration explicitly enables `FUMOUNT_DESIGN_PREVIEW=true` while
+merchant credentials are unavailable. It shows the approved designs and blocks
+unconfigured shopping/account requests. To enable real commerce, remove that
+preview setting and supply the original Shopify environment variables, including
+a persistent `SESSION_SECRET`, in Vercel. Do not commit merchant credentials.
+
 The updated homepage has five benefits followed by four Best Sellers. The six
 designs live on `/collections/all`, with two collections at `/collections/ritual`
 and `/collections/treasury`. The original Shopify product, cart, account and

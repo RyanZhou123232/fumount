@@ -6,13 +6,15 @@
   "type": "module",
   "scripts": {
     "build": "shopify hydrogen build --codegen",
+    "build:vercel": "npm run build && node scripts/build-vercel.mjs",
     "dev": "shopify hydrogen dev --codegen",
     "preview": "shopify hydrogen preview --build",
     "lint": "eslint --no-error-on-unmatched-pattern .",
     "typecheck": "react-router typegen && tsc --noEmit",
     "codegen": "shopify hydrogen codegen && react-router typegen",
     "dev:preview": "npm run build && node scripts/dev-preview.mjs",
-    "test:catalogue": "node scripts/test-catalogue.mjs"
+    "test:catalogue": "node scripts/test-catalogue.mjs",
+    "test:vercel": "node scripts/test-vercel.mjs"
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {

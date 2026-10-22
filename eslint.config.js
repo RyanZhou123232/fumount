@@ -24,6 +24,7 @@ const compat = new FlatCompat({
 export default [
   {
     ignores: [
+      '**/.vercel/',
       '**/node_modules/',
       '**/build/',
       '**/dist/',
