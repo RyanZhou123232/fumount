@@ -675,9 +675,12 @@
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
     }
 
-    .flip-module__dot {
+    .flip-module .flip-module__dot {
       width: 8px;
       height: 8px;
+      min-width: 0;
+      min-height: 0;
+      flex: 0 0 8px;
       padding: 0;
       border-radius: 50%;
       border: 1px solid rgba(255, 255, 255, 0.55);
@@ -686,11 +689,12 @@
       transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
     }
 
-    .flip-module__dot:hover {
+    .flip-module .flip-module__dot:hover {
       background: rgba(255, 255, 255, 0.55);
+      transform: none;
     }
 
-    .flip-module__dot.is-active {
+    .flip-module .flip-module__dot.is-active {
       background: #fff;
       border-color: #fff;
       transform: scale(1.22);
@@ -715,6 +719,33 @@
         transition: none;
       }
     }
+
+    .flip-module .flip-module__dot:focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 4px;
+    }
+
+    .journal-preview {
+      min-height: 75vh;
+      padding: calc(var(--announce-h) + var(--header-main-h) + 64px) var(--pad) 80px;
+      background: #eee6d8;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: clamp(32px, 7vw, 100px);
+      align-items: center;
+    }
+
+    .journal-preview__image img { max-height: 580px; object-fit: cover; }
+    .journal-preview__copy { max-width: 500px; }
+    .journal-preview__eyebrow { letter-spacing: .2em; text-transform: uppercase; font-size: 12px; }
+    .journal-preview h1 {
+      font-family: "Cormorant SC", Georgia, serif;
+      font-size: clamp(32px, 4vw, 56px);
+      line-height: 1.2;
+      margin: 24px 0;
+    }
+    .journal-preview p { line-height: 1.8; margin-bottom: 20px; }
+    @media (max-width: 767px) { .journal-preview { grid-template-columns: 1fr; } }
 
     /* Immersive — rice-paper field; row enters once: cards drop L→R when section scrolls into view */
     .immersive-scroll {

@@ -4,9 +4,11 @@ import {Image, getPaginationVariables} from '@shopify/hydrogen';
 import type {ArticleItemFragment} from 'storefrontapi.generated';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
+import {isDesignPreview} from '~/lib/design-preview';
+import {PreviewJournal} from '~/components/PreviewJournal';
 
 export const meta: Route.MetaFunction = ({data}) => {
-  return [{title: `Hydrogen | ${data?.blog.title ?? ''} blog`}];
+  return [{title: `Fúmount | ${data?.blog?.title ?? 'Journal'}`}];
 };
 
 export async function loader(args: Route.LoaderArgs) {
@@ -24,6 +26,7 @@ export async function loader(args: Route.LoaderArgs) {
  * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  */
 async function loadCriticalData({context, request, params}: Route.LoaderArgs) {
+  if (isDesignPreview(context.env)) return {blog: null};
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 4,
   });
@@ -62,6 +65,7 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 
 export default function Blog() {
   const {blog} = useLoaderData<typeof loader>();
+  if (!blog) return <PreviewJournal />;
   const {articles} = blog;
 
   return (

@@ -1,14 +1,18 @@
 import {useEffect} from 'react';
-import {useLoaderData} from 'react-router';
+import {redirect, useLoaderData} from 'react-router';
 import type {Route} from './+types/($locale).pages.$handle';
 import {redirectIfHandleIsLocalized} from '~/lib/redirect';
 import {useLanguage} from '~/lib/language';
+import {isDesignPreview} from '~/lib/design-preview';
 
 export const meta: Route.MetaFunction = ({data}) => {
   return [{title: `Fúmount | ${data?.page.title ?? ''}`}];
 };
 
 export async function loader(args: Route.LoaderArgs) {
+  if (isDesignPreview(args.context.env) && args.params.handle === 'contact') {
+    return redirect('/pages/about#contact-us');
+  }
   // Start fetching non-critical data without blocking time to first byte
   const deferredData = loadDeferredData(args);
 

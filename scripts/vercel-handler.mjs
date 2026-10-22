@@ -24,7 +24,7 @@ export default async function handler(incoming, outgoing) {
     const path = url.pathname.replace(/^\/[a-z]{2}-[a-z]{2}(?=\/|$)/i, '') || '/';
     // The homepage's client navigation endpoint is /_root.data, not /.data.
     const pagePath = path === '/_root.data' ? '/' : path.replace(/\.data$/, '');
-    const previewPage = /^(?:\/|\/collections\/(?:all|ritual|treasury)|\/designs\/[a-z-]+|\/__manifest)\/?$/.test(pagePath);
+    const previewPage = /^(?:\/|\/collections\/(?:all|ritual|treasury)|\/designs\/[a-z-]+|\/pages\/(?:about|contact)|\/blogs(?:\/news)?|\/__manifest)\/?$/.test(pagePath);
     if (preview && (!previewPage || !['GET', 'HEAD'].includes(incoming.method))) {
       outgoing.writeHead(503, {
         'Content-Type': 'text/html; charset=utf-8',

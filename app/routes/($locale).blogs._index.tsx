@@ -3,11 +3,13 @@ import type {Route} from './+types/($locale).blogs._index';
 import {getPaginationVariables} from '@shopify/hydrogen';
 import {PaginatedResourceSection} from '~/components/PaginatedResourceSection';
 import type {BlogsQuery} from 'storefrontapi.generated';
+import {isDesignPreview} from '~/lib/design-preview';
+import {PreviewJournal} from '~/components/PreviewJournal';
 
 type BlogNode = BlogsQuery['blogs']['nodes'][0];
 
 export const meta: Route.MetaFunction = () => {
-  return [{title: `Hydrogen | Blogs`}];
+  return [{title: 'Fúmount | Journal'}];
 };
 
 export async function loader(args: Route.LoaderArgs) {
@@ -25,6 +27,7 @@ export async function loader(args: Route.LoaderArgs) {
  * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  */
 async function loadCriticalData({context, request}: Route.LoaderArgs) {
+  if (isDesignPreview(context.env)) return {blogs: null};
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 10,
   });
@@ -52,6 +55,7 @@ function loadDeferredData({context}: Route.LoaderArgs) {
 
 export default function Blogs() {
   const {blogs} = useLoaderData<typeof loader>();
+  if (!blogs) return <PreviewJournal />;
 
   return (
     <div className="blogs">

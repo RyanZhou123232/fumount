@@ -37,8 +37,19 @@ try {
   const head = await realFetch(base + '/', {method: 'HEAD'});
   assert.equal(head.status, 200);
   assert.equal(await head.text(), '');
+  for (const [path, text] of [
+    ['/pages/about', 'Who we are'],
+    ['/pages/about#contact-us', 'Contact us'],
+    ['/pages/contact', 'Contact us'],
+    ['/blogs', 'Our stories are coming soon.'],
+    ['/blogs/news', 'Our stories are coming soon.'],
+  ]) {
+    const response = await realFetch(base + path);
+    assert.equal(response.status, 200, path);
+    assert.ok((await response.text()).includes(text), path);
+  }
   // React Router navigations load data endpoints instead of HTML documents.
-  for (const path of ['/_root.data', '/collections/all.data', '/collections/ritual.data', '/collections/treasury.data', '/designs/ritual-ivory.data']) {
+  for (const path of ['/_root.data', '/collections/all.data', '/collections/ritual.data', '/collections/treasury.data', '/designs/ritual-ivory.data', '/pages/about.data', '/blogs/news.data', '/blogs.data']) {
     const response = await realFetch(base + path);
     assert.equal(response.status, 200, path);
     assert.match(response.headers.get('Content-Type'), /text\/x-script/);
